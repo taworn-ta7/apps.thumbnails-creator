@@ -24,7 +24,7 @@ class _ProgressState extends State<ProgressPage> {
   static final appShare = AppShare.instance();
 
   // data
-  final items = <Thumbnail>[];
+  final _items = <Thumbnail>[];
 
   // initial timer handler
   late Timer _initTimer;
@@ -69,11 +69,11 @@ class _ProgressState extends State<ProgressPage> {
             child: RefreshIndicator(
               onRefresh: _refresh,
               child: ListView(
-                children: items.map((item) {
+                children: _items.map((item) {
                   return ListTile(
                     leading: const Icon(Icons.photo_size_select_large),
                     title: Text(item.source),
-                    subtitle: Text(item.target),
+                    subtitle: const Text(''),
                     trailing: const Icon(Icons.check),
                   );
                 }).toList(),
@@ -104,6 +104,6 @@ class _ProgressState extends State<ProgressPage> {
 
   /// Refreshing page.
   Future<void> _refresh() async {
-    //
+    log.finer("HERE");
   }
 }

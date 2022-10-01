@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
+import 'package:byte_converter/byte_converter.dart';
 import 'package:flutter/material.dart';
-import 'package:thumbnails_creator/models/Thumbnail.dart';
-import 'package:thumbnails_creator/ui/custom_app_bar.dart';
+import 'package:file_picker/file_picker.dart';
 import '../i18n/strings.g.dart';
+import '../models/thumbnail.dart';
 import '../services/localization.dart';
 import '../services/app_share.dart';
 import '../ui/custom_app_bar.dart';
@@ -24,7 +26,7 @@ class _StartState extends State<StartPage> {
   static final appShare = AppShare.instance();
 
   // data
-  final items = <Thumbnail>[];
+  final _items = <Thumbnail>[];
 
   // initial timer handler
   late Timer _initTimer;
@@ -49,6 +51,7 @@ class _StartState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     final tr = t.startPage;
+    final f = NumberFormat("###,###,###,###,##0.0", "en_US");
 
     return Scaffold(
       // AppBar
@@ -66,19 +69,17 @@ class _StartState extends State<StartPage> {
         children: [
           // list view
           Expanded(
-            child: RefreshIndicator(
-              onRefresh: _refresh,
-              child: ListView(
-                children: items.map((item) {
-                  return ListTile(
-                    leading: const Icon(Icons.photo_size_select_large),
-                    title: Text(item.source),
-                    subtitle: Text(item.target),
-                    trailing: const Icon(Icons.delete),
-                    onTap: () => _editItem(item),
-                  );
-                }).toList(),
-              ),
+            child: ListView(
+              children: _items.map((item) {
+                final converter = ByteConverter(item.sourceSize.toDouble());
+                return ListTile(
+                  leading: const Icon(Icons.photo_size_select_large),
+                  title: Text(item.sourceName),
+                  subtitle: Text("${f.format(converter.kiloBytes)} KB"),
+                  trailing: const Icon(Icons.delete),
+                  onTap: () => _editItem(item),
+                );
+              }).toList(),
             ),
           ),
 
@@ -101,21 +102,56 @@ class _StartState extends State<StartPage> {
 
   /// A time-consuming initialization.
   Future<void> _handleInit() async {
-    await _refresh();
-  }
-
-  /// Refreshing page.
-  Future<void> _refresh() async {
     //
   }
 
   /// Removes clicked file.
   Future<void> _editItem(Thumbnail o) async {
-    items.remove(o);
+    var index = _items.indexWhere((element) => element.source == o.source);
+    if (index >= 0) {
+      setState(() {
+        _items.removeAt(index);
+        log.info("remove file: ${o.source}");
+        log.info("total ${_items.length} file(s)");
+      });
+    }
   }
 
   /// Adds more file(s) into list.
   Future<void> _addFiles() async {
-    //
+    // open file dialog
+    final items = await FilePicker.platform.pickFiles(
+      allowMultiple: true,
+      type: FileType.custom,
+      allowedExtensions: [
+        'jpeg',
+        'jpg',
+        'png',
+        'gif',
+        'webp',
+        'bmp',
+        'wbmp',
+      ],
+      withData: true,
+    );
+
+    if (items != null) {
+      setState(() {
+        log.info("selected ${items.count} file(s)");
+        var count = 0;
+        for (var i = 0; i < items.count; i++) {
+          var item = items.files[i];
+          var index =
+              _items.indexWhere((element) => element.source == item.path);
+          if (index < 0) {
+            _items.add(Thumbnail(item.path!, item.name, item.size));
+            log.info("add file: ${item.path}");
+            count++;
+          }
+        }
+        log.info("added $count file(s)");
+        log.info("total ${_items.length} file(s)");
+      });
+    }
   }
 }
