@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 import 'package:logging/logging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../i18n/strings.g.dart';
 import '../services/app_share.dart';
 import '../services/localization.dart';
@@ -22,6 +23,8 @@ class PhotoPage extends StatefulWidget {
 class _PhotoState extends State<PhotoPage> {
   static final log = Logger('PhotoPage');
   static final appShare = AppShare.instance();
+
+  final _formKey = GlobalKey<FormState>();
 
   // photo
   bool _asSize = false; // false = %, true = fix width/height
@@ -75,76 +78,89 @@ class _PhotoState extends State<PhotoPage> {
           // widgets
           Expanded(
             child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // size
-                  RadioListTile<bool>(
-                    title: Text(tr.sizeAsPercent),
-                    value: false,
-                    groupValue: _asSize,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _asSize = value ?? false;
-                      });
-                    },
-                  ),
-                  RadioListTile<bool>(
-                    title: Text(tr.sizeAsFix),
-                    value: true,
-                    groupValue: _asSize,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _asSize = value ?? false;
-                      });
-                    },
-                  ),
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // size
+                    RadioListTile<bool>(
+                      title: Text(tr.sizeAsPercent),
+                      value: false,
+                      groupValue: _asSize,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _asSize = value ?? false;
+                        });
+                      },
+                    ),
+                    RadioListTile<bool>(
+                      title: Text(tr.sizeAsFix),
+                      value: true,
+                      groupValue: _asSize,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _asSize = value ?? false;
+                        });
+                      },
+                    ),
 
-                  // width
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: Styles.inputBorder(),
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      counterText: '',
-                      labelText: tr.width,
-                      prefixIcon: Transform.rotate(
-                        angle: 90 * pi / 180,
-                        child: const IconButton(
-                          icon: Icon(Icons.height),
-                          onPressed: null,
+                    // width
+                    TextFormField(
+                      decoration: InputDecoration(
+                        border: Styles.inputBorder(),
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        counterText: '',
+                        labelText: tr.width,
+                        prefixIcon: Transform.rotate(
+                          angle: 90 * pi / 180,
+                          child: const IconButton(
+                            icon: Icon(Icons.height),
+                            onPressed: null,
+                          ),
                         ),
                       ),
+                      keyboardType: const TextInputType.numberWithOptions(
+                        signed: false,
+                        decimal: false,
+                      ),
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ], // Onl
+                      validator: (value) {
+                        var v = int.tryParse(value ?? '');
+                        if (v == null || v <= 0) return "ERROR";
+                        return null;
+                      },
+                      controller: _widthEdit,
                     ),
-                    keyboardType: const TextInputType.numberWithOptions(
-                      signed: false,
-                      decimal: false,
-                    ),
-                    validator: (value) {
-                      return value;
-                    },
-                    controller: _widthEdit,
-                  ),
 
-                  // height
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: Styles.inputBorder(),
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      counterText: '',
-                      labelText: tr.height,
-                      prefixIcon: const Icon(Icons.height),
+                    // height
+                    TextFormField(
+                      decoration: InputDecoration(
+                        border: Styles.inputBorder(),
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        counterText: '',
+                        labelText: tr.height,
+                        prefixIcon: const Icon(Icons.height),
+                      ),
+                      keyboardType: const TextInputType.numberWithOptions(
+                        signed: false,
+                        decimal: false,
+                      ),
+                      inputFormatters: <TextInputFormatter>[
+                        FilteringTextInputFormatter.digitsOnly
+                      ], // Onl
+                      validator: (value) {
+                        var v = int.tryParse(value ?? '');
+                        if (v == null || v <= 0) return "ERROR";
+                        return null;
+                      },
+                      controller: _heightEdit,
                     ),
-                    keyboardType: const TextInputType.numberWithOptions(
-                      signed: false,
-                      decimal: false,
-                    ),
-                    validator: (value) {
-                      return value;
-                    },
-                    controller: _widthEdit,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
@@ -157,8 +173,11 @@ class _PhotoState extends State<PhotoPage> {
                 Navigator.popAndPushNamed(context, Pages.location),
             rightIcon: const Icon(Icons.arrow_forward_ios),
             rightText: t.common.next,
-            onRightClick: () =>
-                Navigator.popAndPushNamed(context, Pages.progress),
+            onRightClick: () {
+              if (_formKey.currentState!.validate()) {
+                Navigator.popAndPushNamed(context, Pages.progress);
+              }
+            },
           ),
         ],
       ),

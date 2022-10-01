@@ -26,6 +26,8 @@ class _LocationState extends State<LocationPage> {
 
   static const defaultFileOutput = '%F_thumb%N';
 
+  final _formKey = GlobalKey<FormState>();
+
   // directory
   bool _asDir = false; // false = same as source, true = choose directory
   String _dir = '';
@@ -75,66 +77,70 @@ class _LocationState extends State<LocationPage> {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  // directory
-                  ListTile(
-                    title: Text(tr.directory),
-                  ),
-                  RadioListTile<bool>(
-                    title: Text(tr.dirAsSame),
-                    value: false,
-                    groupValue: _asDir,
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _asDir = value ?? false;
-                      });
-                    },
-                  ),
-                  RadioListTile<bool>(
-                    title: Text(tr.dirAsFix),
-                    subtitle: Text(_dir),
-                    value: true,
-                    groupValue: _asDir,
-                    secondary: IconButton(
-                      icon: const Icon(Icons.more_horiz),
-                      onPressed: _setDirectory,
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    // directory
+                    ListTile(
+                      title: Text(tr.directory),
                     ),
-                    onChanged: (bool? value) {
-                      setState(() {
-                        _asDir = value ?? false;
-                      });
-                    },
-                  ),
-
-                  // file
-                  ListTile(
-                    title: Text(tr.file),
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      border: Styles.inputBorder(),
-                      floatingLabelBehavior: FloatingLabelBehavior.never,
-                      counterText: '',
-                      labelText: tr.fileOutput,
-                      prefixIcon: const Icon(Icons.edit_note),
-                      suffixIcon: GestureDetector(
-                        child: const Icon(Icons.textsms),
-                        onTap: () => setState(() {
-                          _fileEdit.text = defaultFileOutput;
-                        }),
+                    RadioListTile<bool>(
+                      title: Text(tr.dirAsSame),
+                      value: false,
+                      groupValue: _asDir,
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _asDir = value ?? false;
+                        });
+                      },
+                    ),
+                    RadioListTile<bool>(
+                      title: Text(tr.dirAsFix),
+                      subtitle: Text(_dir),
+                      value: true,
+                      groupValue: _asDir,
+                      secondary: IconButton(
+                        icon: const Icon(Icons.more_horiz),
+                        onPressed: _setDirectory,
                       ),
+                      onChanged: (bool? value) {
+                        setState(() {
+                          _asDir = value ?? false;
+                        });
+                      },
                     ),
-                    keyboardType: TextInputType.text,
-                    validator: (value) {
-                      return value;
-                    },
-                    controller: _fileEdit,
-                  ),
-                  Text(tr.fileHint),
-                ],
+
+                    // file
+                    ListTile(
+                      title: Text(tr.file),
+                    ),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        border: Styles.inputBorder(),
+                        floatingLabelBehavior: FloatingLabelBehavior.never,
+                        counterText: '',
+                        labelText: tr.fileOutput,
+                        prefixIcon: const Icon(Icons.edit_note),
+                        suffixIcon: GestureDetector(
+                          child: const Icon(Icons.textsms),
+                          onTap: () => setState(() {
+                            _fileEdit.text = defaultFileOutput;
+                          }),
+                        ),
+                      ),
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value == '') return "ERROR";
+                        return null;
+                      },
+                      controller: _fileEdit,
+                    ),
+                    Text(tr.fileHint),
+                  ],
+                ),
               ),
             ),
           ),
@@ -146,7 +152,11 @@ class _LocationState extends State<LocationPage> {
             onLeftClick: () => Navigator.popAndPushNamed(context, ''),
             rightIcon: const Icon(Icons.arrow_forward_ios),
             rightText: t.common.next,
-            onRightClick: () => Navigator.popAndPushNamed(context, Pages.photo),
+            onRightClick: () {
+              if (_formKey.currentState!.validate()) {
+                Navigator.popAndPushNamed(context, Pages.photo);
+              }
+            },
           ),
         ],
       ),
