@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:logging/logging.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
@@ -24,8 +23,6 @@ class _LocationState extends State<LocationPage> {
   static final log = Logger('LocationPage');
   static final appShare = AppShare.instance();
 
-  static const defaultFileOutput = '%F_thumb%N';
-
   final _formKey = GlobalKey<FormState>();
 
   // directory
@@ -41,7 +38,7 @@ class _LocationState extends State<LocationPage> {
   @override
   void initState() {
     super.initState();
-    _fileEdit = TextEditingController(text: defaultFileOutput);
+    _fileEdit = TextEditingController();
     _initTimer = Timer(const Duration(), _handleInit);
     log.fine("$this initState()");
   }
@@ -127,7 +124,7 @@ class _LocationState extends State<LocationPage> {
                         suffixIcon: GestureDetector(
                           child: const Icon(Icons.textsms),
                           onTap: () => setState(() {
-                            _fileEdit.text = defaultFileOutput;
+                            _fileEdit.text = AppShare.defaultFileOutput;
                           }),
                         ),
                       ),
@@ -152,11 +149,7 @@ class _LocationState extends State<LocationPage> {
             onLeftClick: () => Navigator.popAndPushNamed(context, ''),
             rightIcon: const Icon(Icons.arrow_forward_ios),
             rightText: t.common.next,
-            onRightClick: () {
-              if (_formKey.currentState!.validate()) {
-                Navigator.popAndPushNamed(context, Pages.photo);
-              }
-            },
+            onRightClick: _nextPage,
           ),
         ],
       ),
@@ -168,10 +161,9 @@ class _LocationState extends State<LocationPage> {
   /// A time-consuming initialization.
   Future<void> _handleInit() async {
     setState(() {
-      _dir = Platform.environment['HOME'] ??
-          Platform.environment['USERPROFILE'] ??
-          '';
-      log.info("home directory: $_dir");
+      _asDir = appShare.asDir;
+      _dir = appShare.dir;
+      _fileEdit.text = appShare.filePattern;
     });
   }
 
@@ -184,5 +176,16 @@ class _LocationState extends State<LocationPage> {
         log.info("directory selected: $path");
       });
     }
+  }
+
+  /// Next page.
+  Future<void> _nextPage() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    appShare.asDir = _asDir;
+    appShare.dir = _dir;
+    appShare.filePattern = _fileEdit.text;
+
+    Navigator.popAndPushNamed(context, Pages.photo);
   }
 }

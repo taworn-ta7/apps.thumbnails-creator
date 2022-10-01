@@ -90,8 +90,7 @@ class _StartState extends State<StartPage> {
             onLeftClick: _addFiles,
             rightIcon: const Icon(Icons.arrow_forward_ios),
             rightText: t.common.next,
-            onRightClick: () =>
-                Navigator.popAndPushNamed(context, Pages.location),
+            onRightClick: _nextPage,
           ),
         ],
       ),
@@ -102,7 +101,13 @@ class _StartState extends State<StartPage> {
 
   /// A time-consuming initialization.
   Future<void> _handleInit() async {
-    //
+    setState(() {
+      var images = appShare.images;
+      _items.clear();
+      for (var i = 0; i < images.length; i++) {
+        _items.add(images[i]);
+      }
+    });
   }
 
   /// Removes clicked file.
@@ -152,5 +157,18 @@ class _StartState extends State<StartPage> {
         log.info("total ${_items.length} file(s)");
       });
     }
+  }
+
+  /// Next page.
+  Future<void> _nextPage() async {
+    if (_items.isEmpty) return;
+
+    var images = appShare.images;
+    images.clear();
+    for (var i = 0; i < _items.length; i++) {
+      images.add(_items[i]);
+    }
+
+    Navigator.popAndPushNamed(context, Pages.location);
   }
 }

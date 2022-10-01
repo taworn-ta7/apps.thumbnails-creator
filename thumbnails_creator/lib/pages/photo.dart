@@ -173,11 +173,7 @@ class _PhotoState extends State<PhotoPage> {
                 Navigator.popAndPushNamed(context, Pages.location),
             rightIcon: const Icon(Icons.arrow_forward_ios),
             rightText: t.common.next,
-            onRightClick: () {
-              if (_formKey.currentState!.validate()) {
-                Navigator.popAndPushNamed(context, Pages.progress);
-              }
-            },
+            onRightClick: _nextPage,
           ),
         ],
       ),
@@ -188,6 +184,21 @@ class _PhotoState extends State<PhotoPage> {
 
   /// A time-consuming initialization.
   Future<void> _handleInit() async {
-    //
+    setState(() {
+      _asSize = appShare.asSize;
+      _widthEdit.text = appShare.width.toString();
+      _heightEdit.text = appShare.height.toString();
+    });
+  }
+
+  /// Next page.
+  Future<void> _nextPage() async {
+    if (!_formKey.currentState!.validate()) return;
+
+    appShare.asSize = _asSize;
+    appShare.width = int.tryParse(_widthEdit.text) ?? 0;
+    appShare.height = int.tryParse(_heightEdit.text) ?? 0;
+
+    Navigator.popAndPushNamed(context, Pages.progress);
   }
 }
