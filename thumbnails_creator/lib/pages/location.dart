@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:logging/logging.dart';
 import 'package:flutter/material.dart';
+import 'package:file_picker/file_picker.dart';
 import '../i18n/strings.g.dart';
 import '../services/app_share.dart';
 import '../services/localization.dart';
@@ -26,7 +28,7 @@ class _LocationState extends State<LocationPage> {
 
   // directory
   bool _asDir = false; // false = same as source, true = choose directory
-  String? _dir;
+  String _dir = '';
 
   // file
   late TextEditingController _fileEdit;
@@ -71,7 +73,6 @@ class _LocationState extends State<LocationPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // widgets
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -94,12 +95,12 @@ class _LocationState extends State<LocationPage> {
                   ),
                   RadioListTile<bool>(
                     title: Text(tr.dirAsFix),
-                    subtitle: const Text('<directory>'),
+                    subtitle: Text(_dir),
                     value: true,
                     groupValue: _asDir,
                     secondary: IconButton(
                       icon: const Icon(Icons.more_horiz),
-                      onPressed: () {},
+                      onPressed: _setDirectory,
                     ),
                     onChanged: (bool? value) {
                       setState(() {
@@ -132,6 +133,7 @@ class _LocationState extends State<LocationPage> {
                     },
                     controller: _fileEdit,
                   ),
+                  Text(tr.fileHint),
                 ],
               ),
             ),
@@ -155,6 +157,22 @@ class _LocationState extends State<LocationPage> {
 
   /// A time-consuming initialization.
   Future<void> _handleInit() async {
-    //
+    setState(() {
+      _dir = Platform.environment['HOME'] ??
+          Platform.environment['USERPROFILE'] ??
+          '';
+      log.info("home directory: $_dir");
+    });
+  }
+
+  /// Chooses a directory.
+  Future<void> _setDirectory() async {
+    final path = await FilePicker.platform.getDirectoryPath();
+    if (path != null) {
+      setState(() {
+        _dir = path;
+        log.info("directory selected: $path");
+      });
+    }
   }
 }

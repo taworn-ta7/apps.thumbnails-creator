@@ -119,7 +119,6 @@ class _StartState extends State<StartPage> {
 
   /// Adds more file(s) into list.
   Future<void> _addFiles() async {
-    // open file dialog
     final items = await FilePicker.platform.pickFiles(
       allowMultiple: true,
       type: FileType.custom,
@@ -132,7 +131,7 @@ class _StartState extends State<StartPage> {
         'bmp',
         'wbmp',
       ],
-      withData: true,
+      withData: false,
     );
 
     if (items != null) {

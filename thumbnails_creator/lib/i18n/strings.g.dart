@@ -5,7 +5,7 @@
  * Locales: 2
  * Strings: 126 (63.0 per locale)
  *
- * Built on 2022-10-01 at 16:13 UTC
+ * Built on 2022-10-01 at 20:45 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -466,7 +466,7 @@ class _StringsLocationPageEn {
 	String get dirAsFix => 'Select directory...';
 	String get file => 'File';
 	String get fileOutput => 'File pattern';
-	String get fileHint => '%F - Filename without extension\n%N - Number of trying, start from 1';
+	String get fileHint => '%F - Filename without extension\n%N - Number of trying\n%% - Percent (%) sign';
 }
 
 // Path: photoPage
@@ -667,7 +667,7 @@ class _StringsLocationPageTh implements _StringsLocationPageEn {
 	@override String get dirAsFix => 'เลือก directory...';
 	@override String get file => 'ไฟล์';
 	@override String get fileOutput => 'รูปแบบไฟล์';
-	@override String get fileHint => '%F - ชื่อไฟล์ ไม่รวมนามสกุล\n%N - จำนวนครั้งที่ลอง เริ่มจาก 1';
+	@override String get fileHint => '%F - ชื่อไฟล์ ไม่รวมนามสกุล\n%N - จำนวนครั้งที่ลอง\n%% - เครื่องหมายเปอร์เซ็นต์ (%)';
 }
 
 // Path: photoPage
@@ -756,7 +756,7 @@ extension on _StringsEn {
 			'locationPage.dirAsFix': 'Select directory...',
 			'locationPage.file': 'File',
 			'locationPage.fileOutput': 'File pattern',
-			'locationPage.fileHint': '%F - Filename without extension\n%N - Number of trying, start from 1',
+			'locationPage.fileHint': '%F - Filename without extension\n%N - Number of trying\n%% - Percent (%) sign',
 			'photoPage.title': 'Photo Settings',
 			'photoPage.sizeAsPercent': 'Size as percent',
 			'photoPage.sizeAsFix': 'Size as fix width and height',
@@ -826,7 +826,7 @@ extension on _StringsTh {
 			'locationPage.dirAsFix': 'เลือก directory...',
 			'locationPage.file': 'ไฟล์',
 			'locationPage.fileOutput': 'รูปแบบไฟล์',
-			'locationPage.fileHint': '%F - ชื่อไฟล์ ไม่รวมนามสกุล\n%N - จำนวนครั้งที่ลอง เริ่มจาก 1',
+			'locationPage.fileHint': '%F - ชื่อไฟล์ ไม่รวมนามสกุล\n%N - จำนวนครั้งที่ลอง\n%% - เครื่องหมายเปอร์เซ็นต์ (%)',
 			'photoPage.title': 'การเซ็ตค่ารูปภาพ',
 			'photoPage.sizeAsPercent': 'ขนาดเป็น %',
 			'photoPage.sizeAsFix': 'ขนาดเป็น กว้าง x สูง',
