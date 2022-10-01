@@ -68,10 +68,20 @@
         "addFiles": "Add File(s)..."
     },
     "locationPage": {
-        "title": "Path and File"
+        "title": "Directory and File",
+        "directory": "Directory",
+        "dirAsSame": "Same as source images",
+        "dirAsFix": "Select directory...",
+        "file": "File",
+        "fileOutput": "File pattern",
+        "fileHint": "%F - Filename without extension\n%N - Number of trying, start from 1"
     },
     "photoPage": {
-        "title": "Photo Settings"
+        "title": "Photo Settings",
+        "sizeAsPercent": "Size as percent",
+        "sizeAsFix": "Size as fix width and height",
+        "width": "Width",
+        "height": "Height"
     },
     "progressPage": {
         "title": "Progress"

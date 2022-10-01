@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:math';
 import 'package:logging/logging.dart';
 import 'package:flutter/material.dart';
 import '../i18n/strings.g.dart';
@@ -6,6 +7,7 @@ import '../services/app_share.dart';
 import '../services/localization.dart';
 import '../ui/custom_app_bar.dart';
 import '../ui/custom_bottom_bar.dart';
+import '../styles.dart';
 import '../pages.dart';
 
 /// PhotoPage class.
@@ -21,12 +23,21 @@ class _PhotoState extends State<PhotoPage> {
   static final log = Logger('PhotoPage');
   static final appShare = AppShare.instance();
 
+  // photo
+  bool _asSize = false; // false = %, true = fix width/height
+
+  // file
+  late TextEditingController _widthEdit;
+  late TextEditingController _heightEdit;
+
   // initial timer handler
   late Timer _initTimer;
 
   @override
   void initState() {
     super.initState();
+    _widthEdit = TextEditingController();
+    _heightEdit = TextEditingController();
     _initTimer = Timer(const Duration(), _handleInit);
     log.fine("$this initState()");
   }
@@ -35,6 +46,8 @@ class _PhotoState extends State<PhotoPage> {
   void dispose() {
     log.fine("$this dispose()");
     _initTimer.cancel();
+    _heightEdit.dispose();
+    _widthEdit.dispose();
     super.dispose();
   }
 
@@ -60,10 +73,78 @@ class _PhotoState extends State<PhotoPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // widgets
-          const Expanded(
+          Expanded(
             child: SingleChildScrollView(
-              child: Center(
-                child: Text("Photo"),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // size
+                  RadioListTile<bool>(
+                    title: Text(tr.sizeAsPercent),
+                    value: false,
+                    groupValue: _asSize,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _asSize = value ?? false;
+                      });
+                    },
+                  ),
+                  RadioListTile<bool>(
+                    title: Text(tr.sizeAsFix),
+                    value: true,
+                    groupValue: _asSize,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _asSize = value ?? false;
+                      });
+                    },
+                  ),
+
+                  // width
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: Styles.inputBorder(),
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      counterText: '',
+                      labelText: tr.width,
+                      prefixIcon: Transform.rotate(
+                        angle: 90 * pi / 180,
+                        child: const IconButton(
+                          icon: Icon(Icons.height),
+                          onPressed: null,
+                        ),
+                      ),
+                    ),
+                    keyboardType: const TextInputType.numberWithOptions(
+                      signed: false,
+                      decimal: false,
+                    ),
+                    validator: (value) {
+                      return value;
+                    },
+                    controller: _widthEdit,
+                  ),
+
+                  // height
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: Styles.inputBorder(),
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      counterText: '',
+                      labelText: tr.height,
+                      prefixIcon: const Icon(Icons.height),
+                    ),
+                    keyboardType: const TextInputType.numberWithOptions(
+                      signed: false,
+                      decimal: false,
+                    ),
+                    validator: (value) {
+                      return value;
+                    },
+                    controller: _widthEdit,
+                  ),
+                ],
               ),
             ),
           ),

@@ -6,6 +6,7 @@ import '../services/app_share.dart';
 import '../services/localization.dart';
 import '../ui/custom_app_bar.dart';
 import '../ui/custom_bottom_bar.dart';
+import '../styles.dart';
 import '../pages.dart';
 
 /// LocationPage class.
@@ -21,12 +22,22 @@ class _LocationState extends State<LocationPage> {
   static final log = Logger('LocationPage');
   static final appShare = AppShare.instance();
 
+  static const defaultFileOutput = '%F_thumb%N';
+
+  // directory
+  bool _asDir = false; // false = same as source, true = choose directory
+  String? _dir;
+
+  // file
+  late TextEditingController _fileEdit;
+
   // initial timer handler
   late Timer _initTimer;
 
   @override
   void initState() {
     super.initState();
+    _fileEdit = TextEditingController(text: defaultFileOutput);
     _initTimer = Timer(const Duration(), _handleInit);
     log.fine("$this initState()");
   }
@@ -35,6 +46,7 @@ class _LocationState extends State<LocationPage> {
   void dispose() {
     log.fine("$this dispose()");
     _initTimer.cancel();
+    _fileEdit.dispose();
     super.dispose();
   }
 
@@ -60,10 +72,67 @@ class _LocationState extends State<LocationPage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // widgets
-          const Expanded(
+          Expanded(
             child: SingleChildScrollView(
-              child: Center(
-                child: Text("Location"),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  // directory
+                  ListTile(
+                    title: Text(tr.directory),
+                  ),
+                  RadioListTile<bool>(
+                    title: Text(tr.dirAsSame),
+                    value: false,
+                    groupValue: _asDir,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _asDir = value ?? false;
+                      });
+                    },
+                  ),
+                  RadioListTile<bool>(
+                    title: Text(tr.dirAsFix),
+                    subtitle: const Text('<directory>'),
+                    value: true,
+                    groupValue: _asDir,
+                    secondary: IconButton(
+                      icon: const Icon(Icons.more_horiz),
+                      onPressed: () {},
+                    ),
+                    onChanged: (bool? value) {
+                      setState(() {
+                        _asDir = value ?? false;
+                      });
+                    },
+                  ),
+
+                  // file
+                  ListTile(
+                    title: Text(tr.file),
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      border: Styles.inputBorder(),
+                      floatingLabelBehavior: FloatingLabelBehavior.never,
+                      counterText: '',
+                      labelText: tr.fileOutput,
+                      prefixIcon: const Icon(Icons.edit_note),
+                      suffixIcon: GestureDetector(
+                        child: const Icon(Icons.textsms),
+                        onTap: () => setState(() {
+                          _fileEdit.text = defaultFileOutput;
+                        }),
+                      ),
+                    ),
+                    keyboardType: TextInputType.text,
+                    validator: (value) {
+                      return value;
+                    },
+                    controller: _fileEdit,
+                  ),
+                ],
               ),
             ),
           ),

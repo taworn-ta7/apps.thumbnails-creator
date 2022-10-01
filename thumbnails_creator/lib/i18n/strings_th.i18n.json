@@ -68,10 +68,20 @@
         "addFiles": "เพิ่มไฟล์..."
     },
     "locationPage": {
-        "title": "พาธ และ ไฟล์"
+        "title": "พาธและไฟล์",
+        "directory": "Directory",
+        "dirAsSame": "เหมือนกับต้นทาง",
+        "dirAsFix": "เลือก directory...",
+        "file": "ไฟล์",
+        "fileOutput": "รูปแบบไฟล์",
+        "fileHint": "%F - ชื่อไฟล์ ไม่รวมนามสกุล\n%N - จำนวนครั้งที่ลอง เริ่มจาก 1"
     },
     "photoPage": {
-        "title": "การเซ็ตค่ารูปภาพ"
+        "title": "การเซ็ตค่ารูปภาพ",
+        "sizeAsPercent": "ขนาดเป็น %",
+        "sizeAsFix": "ขนาดเป็น กว้าง x สูง",
+        "width": "ความกว้าง",
+        "height": "ความสูง"
     },
     "progressPage": {
         "title": "การทำงาน"

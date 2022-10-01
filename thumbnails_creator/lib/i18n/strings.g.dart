@@ -3,9 +3,9 @@
  * Generated file. Do not edit.
  *
  * Locales: 2
- * Strings: 106 (53.0 per locale)
+ * Strings: 126 (63.0 per locale)
  *
- * Built on 2022-10-01 at 12:42 UTC
+ * Built on 2022-10-01 at 16:13 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -460,7 +460,13 @@ class _StringsLocationPageEn {
 	final _StringsEn _root; // ignore: unused_field
 
 	// Translations
-	String get title => 'Path and File';
+	String get title => 'Directory and File';
+	String get directory => 'Directory';
+	String get dirAsSame => 'Same as source images';
+	String get dirAsFix => 'Select directory...';
+	String get file => 'File';
+	String get fileOutput => 'File pattern';
+	String get fileHint => '%F - Filename without extension\n%N - Number of trying, start from 1';
 }
 
 // Path: photoPage
@@ -471,6 +477,10 @@ class _StringsPhotoPageEn {
 
 	// Translations
 	String get title => 'Photo Settings';
+	String get sizeAsPercent => 'Size as percent';
+	String get sizeAsFix => 'Size as fix width and height';
+	String get width => 'Width';
+	String get height => 'Height';
 }
 
 // Path: progressPage
@@ -651,7 +661,13 @@ class _StringsLocationPageTh implements _StringsLocationPageEn {
 	@override final _StringsTh _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'พาธ และ ไฟล์';
+	@override String get title => 'พาธและไฟล์';
+	@override String get directory => 'Directory';
+	@override String get dirAsSame => 'เหมือนกับต้นทาง';
+	@override String get dirAsFix => 'เลือก directory...';
+	@override String get file => 'ไฟล์';
+	@override String get fileOutput => 'รูปแบบไฟล์';
+	@override String get fileHint => '%F - ชื่อไฟล์ ไม่รวมนามสกุล\n%N - จำนวนครั้งที่ลอง เริ่มจาก 1';
 }
 
 // Path: photoPage
@@ -662,6 +678,10 @@ class _StringsPhotoPageTh implements _StringsPhotoPageEn {
 
 	// Translations
 	@override String get title => 'การเซ็ตค่ารูปภาพ';
+	@override String get sizeAsPercent => 'ขนาดเป็น %';
+	@override String get sizeAsFix => 'ขนาดเป็น กว้าง x สูง';
+	@override String get width => 'ความกว้าง';
+	@override String get height => 'ความสูง';
 }
 
 // Path: progressPage
@@ -730,8 +750,18 @@ extension on _StringsEn {
 			'imageChooser.revert': 'Revert',
 			'startPage.title': '${_root.app}',
 			'startPage.addFiles': 'Add File(s)...',
-			'locationPage.title': 'Path and File',
+			'locationPage.title': 'Directory and File',
+			'locationPage.directory': 'Directory',
+			'locationPage.dirAsSame': 'Same as source images',
+			'locationPage.dirAsFix': 'Select directory...',
+			'locationPage.file': 'File',
+			'locationPage.fileOutput': 'File pattern',
+			'locationPage.fileHint': '%F - Filename without extension\n%N - Number of trying, start from 1',
 			'photoPage.title': 'Photo Settings',
+			'photoPage.sizeAsPercent': 'Size as percent',
+			'photoPage.sizeAsFix': 'Size as fix width and height',
+			'photoPage.width': 'Width',
+			'photoPage.height': 'Height',
 			'progressPage.title': 'Progress',
 		};
 	}
@@ -790,8 +820,18 @@ extension on _StringsTh {
 			'imageChooser.revert': 'ย้อนกลับ',
 			'startPage.title': '${_root.app}',
 			'startPage.addFiles': 'เพิ่มไฟล์...',
-			'locationPage.title': 'พาธ และ ไฟล์',
+			'locationPage.title': 'พาธและไฟล์',
+			'locationPage.directory': 'Directory',
+			'locationPage.dirAsSame': 'เหมือนกับต้นทาง',
+			'locationPage.dirAsFix': 'เลือก directory...',
+			'locationPage.file': 'ไฟล์',
+			'locationPage.fileOutput': 'รูปแบบไฟล์',
+			'locationPage.fileHint': '%F - ชื่อไฟล์ ไม่รวมนามสกุล\n%N - จำนวนครั้งที่ลอง เริ่มจาก 1',
 			'photoPage.title': 'การเซ็ตค่ารูปภาพ',
+			'photoPage.sizeAsPercent': 'ขนาดเป็น %',
+			'photoPage.sizeAsFix': 'ขนาดเป็น กว้าง x สูง',
+			'photoPage.width': 'ความกว้าง',
+			'photoPage.height': 'ความสูง',
 			'progressPage.title': 'การทำงาน',
 		};
 	}
