@@ -1,0 +1,79 @@
+{
+    "app": "Thumbnails Creator",
+    "switchLocale": {
+        "en": "Change Language to English",
+        "th": "Change Language to ไทย"
+    },
+    "common": {
+        "close": "Close",
+        "ok": "OK",
+        "cancel": "Cancel",
+        "yes": "Yes",
+        "no": "No",
+        "retry": "Retry",
+        "name": "Name",
+        "value": "Value",
+        "create": "Create",
+        "createMore": "Create...",
+        "update": "Save",
+        "updateMore": "Save...",
+        "remove": "Delete",
+        "removeMore": "Delete...",
+        "back": "Back",
+        "next": "Next"
+    },
+    "question": {
+        "areYouSureToQuit": "Are you sure to exit this program?",
+        "areYouSureToDelete": "Are you sure to delete this item?",
+        "areYouSureToLeave": "Are you sure to leave without save data?"
+    },
+    "validator": {
+        "isMinInt": "Please input as integer, minimum >= $min.",
+        "isMaxInt": "Please input as integer, maximum <= $max.",
+        "isPositiveInt": "Please input as positive integer.",
+        "isPositiveOrZeroInt": "Please input as positive integer or zero.",
+        "isNegativeInt": "Please input as negative integer.",
+        "isNegativeOrZeroInt": "Please input as negative integer or zero.",
+        "isMinFloat": "Please input as floating-point, minimum >= $min.",
+        "isMaxFloat": "Please input as floating-point, maximum <= $max.",
+        "isPositiveFloat": "Please input as positive floating-point.",
+        "isPositiveOrZeroFloat": "Please input as positive floating-point or zero.",
+        "isNegativeFloat": "Please input as negative floating-point.",
+        "isNegativeOrZeroFloat": "Please input as negative floating-point or zero.",
+        "isMoney": "Please input as money.",
+        "isMinLength": "Please input length >= $min.",
+        "isMaxLength": "Please input length <= $max.",
+        "isEmail": "Please input as email.",
+        "isSamePasswords": "Password and confirm password must be equal."
+    },
+    "error": {
+        "unknown": "HTTP error ($statusCode)"
+    },
+    "messageBox": {
+        "info": "Information",
+        "warning": "Warning",
+        "error": "Error",
+        "question": "Question"
+    },
+    "waitBox": {
+        "message": "Please wait..."
+    },
+    "imageChooser": {
+        "upload": "Upload",
+        "reset": "Reset",
+        "revert": "Revert"
+    },
+    "startPage": {
+        "title": "@:app",
+        "addFiles": "Add File(s)..."
+    },
+    "locationPage": {
+        "title": "Path and File"
+    },
+    "photoPage": {
+        "title": "Photo Settings"
+    },
+    "progressPage": {
+        "title": "Progress"
+    }
+}
