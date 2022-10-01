@@ -66,18 +66,15 @@ class _ProgressState extends State<ProgressPage> {
         children: [
           // list view
           Expanded(
-            child: RefreshIndicator(
-              onRefresh: _refresh,
-              child: ListView(
-                children: _items.map((item) {
-                  return ListTile(
-                    leading: const Icon(Icons.photo_size_select_large),
-                    title: Text(item.source),
-                    subtitle: const Text(''),
-                    trailing: const Icon(Icons.check),
-                  );
-                }).toList(),
-              ),
+            child: ListView(
+              children: _items.map((item) {
+                return ListTile(
+                  leading: const Icon(Icons.photo_size_select_large),
+                  title: Text(item.source),
+                  subtitle: const Text(''),
+                  trailing: const Icon(Icons.check),
+                );
+              }).toList(),
             ),
           ),
 
@@ -99,11 +96,6 @@ class _ProgressState extends State<ProgressPage> {
 
   /// A time-consuming initialization.
   Future<void> _handleInit() async {
-    await _refresh();
-  }
-
-  /// Refreshing page.
-  Future<void> _refresh() async {
-    log.finer("HERE");
+    //
   }
 }
