@@ -3,9 +3,9 @@
  * Generated file. Do not edit.
  *
  * Locales: 2
- * Strings: 140 (70.0 per locale)
+ * Strings: 142 (71.0 per locale)
  *
- * Built on 2022-10-02 at 10:59 UTC
+ * Built on 2022-10-02 at 11:41 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -406,6 +406,7 @@ class _StringsErrorEn {
 	final _StringsEn _root; // ignore: unused_field
 
 	// Translations
+	String get cantOpenImage => 'Cannot open image file!';
 	String unknown({required Object statusCode}) => 'HTTP error ($statusCode)';
 }
 
@@ -614,6 +615,7 @@ class _StringsErrorTh implements _StringsErrorEn {
 	@override final _StringsTh _root; // ignore: unused_field
 
 	// Translations
+	@override String get cantOpenImage => 'ไม่สามารถเปิดไฟล์รูปภาพได้!';
 	@override String unknown({required Object statusCode}) => 'เกิดข้อผิดพลาดจาก HTTP ($statusCode)';
 }
 
@@ -755,6 +757,7 @@ extension on _StringsEn {
 			'validator.isMaxLength': ({required Object max}) => 'Please input length <= $max.',
 			'validator.isEmail': 'Please input as email.',
 			'validator.isSamePasswords': 'Password and confirm password must be equal.',
+			'error.cantOpenImage': 'Cannot open image file!',
 			'error.unknown': ({required Object statusCode}) => 'HTTP error ($statusCode)',
 			'messageBox.info': 'Information',
 			'messageBox.warning': 'Warning',
@@ -832,6 +835,7 @@ extension on _StringsTh {
 			'validator.isMaxLength': ({required Object max}) => 'กรอกข้อมูล ความยาว <= $max',
 			'validator.isEmail': 'กรอกข้อมูล เป็นอีเมล',
 			'validator.isSamePasswords': 'รหัสผ่าน และ ยืนยันรหัสผ่าน ต้องเหมือนกัน',
+			'error.cantOpenImage': 'ไม่สามารถเปิดไฟล์รูปภาพได้!',
 			'error.unknown': ({required Object statusCode}) => 'เกิดข้อผิดพลาดจาก HTTP ($statusCode)',
 			'messageBox.info': 'ข้อมูลข่าวสาร',
 			'messageBox.warning': 'แจ้งเตือน',

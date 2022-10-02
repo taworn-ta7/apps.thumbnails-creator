@@ -15,6 +15,9 @@ class Thumbnail {
   /// Result after processing
   bool? ok;
 
+  /// Error message, if not ok
+  String? error;
+
   /// Constructor
   Thumbnail(
     this.source,

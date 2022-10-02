@@ -49,6 +49,7 @@
         "isSamePasswords": "Password and confirm password must be equal."
     },
     "error": {
+        "cantOpenImage": "Cannot open image file!",
         "unknown": "HTTP error ($statusCode)"
     },
     "messageBox": {

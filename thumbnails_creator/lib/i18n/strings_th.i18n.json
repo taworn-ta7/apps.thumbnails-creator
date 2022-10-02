@@ -49,6 +49,7 @@
         "isSamePasswords": "รหัสผ่าน และ ยืนยันรหัสผ่าน ต้องเหมือนกัน"
     },
     "error": {
+        "cantOpenImage": "ไม่สามารถเปิดไฟล์รูปภาพได้!",
         "unknown": "เกิดข้อผิดพลาดจาก HTTP ($statusCode)"
     },
     "messageBox": {

@@ -132,7 +132,9 @@ class _PhotoState extends State<PhotoPage> {
                       ], // Onl
                       validator: (value) {
                         var v = int.tryParse(value ?? '');
-                        if (v == null || v <= 0) return "ERROR";
+                        if (v == null || v <= 0) {
+                          return t.validator.isPositiveInt;
+                        }
                         return null;
                       },
                       controller: _widthEdit,
@@ -156,7 +158,9 @@ class _PhotoState extends State<PhotoPage> {
                       ], // Onl
                       validator: (value) {
                         var v = int.tryParse(value ?? '');
-                        if (v == null || v <= 0) return "ERROR";
+                        if (v == null || v <= 0) {
+                          return t.validator.isPositiveInt;
+                        }
                         return null;
                       },
                       controller: _heightEdit,
