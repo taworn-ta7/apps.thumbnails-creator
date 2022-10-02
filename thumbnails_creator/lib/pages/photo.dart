@@ -88,6 +88,9 @@ class _PhotoState extends State<PhotoPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // size
+                    ListTile(
+                      title: Text(tr.size),
+                    ),
                     RadioListTile<SizeEnumType>(
                       title: Text(tr.sizeAsPercent),
                       value: SizeEnumType.percent,
@@ -110,61 +113,71 @@ class _PhotoState extends State<PhotoPage> {
                     ),
 
                     // width
-                    TextFormField(
-                      decoration: InputDecoration(
-                        border: Styles.inputBorder(),
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        counterText: '',
-                        labelText: tr.width,
-                        prefixIcon: Transform.rotate(
-                          angle: 90 * pi / 180,
-                          child: const IconButton(
-                            icon: Icon(Icons.height),
-                            onPressed: null,
+                    ListTile(
+                      title: Text(tr.width),
+                    ),
+                    Styles.aroundLeftRight(
+                      TextFormField(
+                        decoration: InputDecoration(
+                          border: Styles.inputBorder(),
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          counterText: '',
+                          labelText: tr.width,
+                          prefixIcon: Transform.rotate(
+                            angle: 90 * pi / 180,
+                            child: const IconButton(
+                              icon: Icon(Icons.height),
+                              onPressed: null,
+                            ),
                           ),
                         ),
+                        keyboardType: const TextInputType.numberWithOptions(
+                          signed: false,
+                          decimal: false,
+                        ),
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ], // Onl
+                        validator: (value) {
+                          var v = int.tryParse(value ?? '');
+                          if (v == null || v <= 0) {
+                            return t.validator.isPositiveInt;
+                          }
+                          return null;
+                        },
+                        controller: _widthEdit,
                       ),
-                      keyboardType: const TextInputType.numberWithOptions(
-                        signed: false,
-                        decimal: false,
-                      ),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ], // Onl
-                      validator: (value) {
-                        var v = int.tryParse(value ?? '');
-                        if (v == null || v <= 0) {
-                          return t.validator.isPositiveInt;
-                        }
-                        return null;
-                      },
-                      controller: _widthEdit,
                     ),
 
                     // height
-                    TextFormField(
-                      decoration: InputDecoration(
-                        border: Styles.inputBorder(),
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        counterText: '',
-                        labelText: tr.height,
-                        prefixIcon: const Icon(Icons.height),
+                    ListTile(
+                      title: Text(tr.height),
+                    ),
+                    Styles.aroundLeftRight(
+                      TextFormField(
+                        decoration: InputDecoration(
+                          border: Styles.inputBorder(),
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          counterText: '',
+                          labelText: tr.height,
+                          prefixIcon: const Icon(Icons.height),
+                        ),
+                        keyboardType: const TextInputType.numberWithOptions(
+                          signed: false,
+                          decimal: false,
+                        ),
+                        inputFormatters: <TextInputFormatter>[
+                          FilteringTextInputFormatter.digitsOnly
+                        ], // Onl
+                        validator: (value) {
+                          var v = int.tryParse(value ?? '');
+                          if (v == null || v <= 0) {
+                            return t.validator.isPositiveInt;
+                          }
+                          return null;
+                        },
+                        controller: _heightEdit,
                       ),
-                      keyboardType: const TextInputType.numberWithOptions(
-                        signed: false,
-                        decimal: false,
-                      ),
-                      inputFormatters: <TextInputFormatter>[
-                        FilteringTextInputFormatter.digitsOnly
-                      ], // Onl
-                      validator: (value) {
-                        var v = int.tryParse(value ?? '');
-                        if (v == null || v <= 0) {
-                          return t.validator.isPositiveInt;
-                        }
-                        return null;
-                      },
-                      controller: _heightEdit,
                     ),
                   ],
                 ),

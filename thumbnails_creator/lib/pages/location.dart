@@ -120,28 +120,33 @@ class _LocationState extends State<LocationPage> {
                     ListTile(
                       title: Text(tr.file),
                     ),
-                    TextFormField(
-                      decoration: InputDecoration(
-                        border: Styles.inputBorder(),
-                        floatingLabelBehavior: FloatingLabelBehavior.never,
-                        counterText: '',
-                        labelText: tr.fileOutput,
-                        prefixIcon: const Icon(Icons.edit_note),
-                        suffixIcon: GestureDetector(
-                          child: const Icon(Icons.textsms),
-                          onTap: () => setState(() {
-                            _fileEdit.text = AppShare.defaultFileOutput;
-                          }),
+                    Styles.aroundLeftRight(
+                      TextFormField(
+                        decoration: InputDecoration(
+                          border: Styles.inputBorder(),
+                          floatingLabelBehavior: FloatingLabelBehavior.never,
+                          counterText: '',
+                          labelText: tr.fileOutput,
+                          prefixIcon: const Icon(Icons.edit_note),
+                          suffixIcon: GestureDetector(
+                            child: const Icon(Icons.textsms),
+                            onTap: () => setState(() {
+                              _fileEdit.text = AppShare.defaultFileOutput;
+                            }),
+                          ),
                         ),
+                        keyboardType: TextInputType.text,
+                        validator: (value) {
+                          if (value == null) return t.validator.isNotBlank;
+                          if (value.trim() == '') return t.validator.isNotBlank;
+                          return null;
+                        },
+                        controller: _fileEdit,
                       ),
-                      keyboardType: TextInputType.text,
-                      validator: (value) {
-                        if (value == '') return "ERROR";
-                        return null;
-                      },
-                      controller: _fileEdit,
                     ),
-                    Text(tr.fileHint),
+                    Styles.aroundLeftRight(
+                      Text(tr.fileHint),
+                    ),
 
                     // type
                     ListTile(
@@ -243,7 +248,7 @@ class _LocationState extends State<LocationPage> {
   void _copyData() {
     appShare.dirEnum = _dirEnum;
     appShare.dir = _dir;
-    appShare.filePattern = _fileEdit.text;
+    appShare.filePattern = _fileEdit.text.trim();
     appShare.extEnum = _type;
   }
 }

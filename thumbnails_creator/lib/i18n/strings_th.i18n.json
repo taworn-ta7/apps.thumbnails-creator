@@ -45,14 +45,14 @@
         "isMoney": "กรอกข้อมูล เป็นเลขจำนวนเงิน.",
         "isMinLength": "กรอกข้อมูล ความยาว >= $min",
         "isMaxLength": "กรอกข้อมูล ความยาว <= $max",
+        "isNotBlank": "กรอกข้อมูล ไม่เป็นช่องว่าง",
         "isEmail": "กรอกข้อมูล เป็นอีเมล",
         "isSamePasswords": "รหัสผ่าน และ ยืนยันรหัสผ่าน ต้องเหมือนกัน"
     },
     "error": {
         "cantOpenImage": "ไม่สามารถเปิดไฟล์รูปภาพได้!",
         "cantSaveImage": "ไม่สามารถเซฟไฟล์รูปภาพได้!",
-        "alreadyExists": "มีไฟล์นี้อยู่แล้ว!",
-        "unknown": "เกิดข้อผิดพลาดจาก HTTP ($statusCode)"
+        "alreadyExists": "มีไฟล์นี้อยู่แล้ว!"
     },
     "messageBox": {
         "info": "ข้อมูลข่าวสาร",
@@ -70,7 +70,7 @@
         "about": "เกี่ยวกับ..."
     },
     "locationPage": {
-        "title": "พาธและไฟล์",
+        "title": "Directory และไฟล์",
         "directory": "Directory",
         "dirAsSame": "เหมือนกับต้นทาง",
         "dirAsFix": "เลือก directory...",
@@ -83,10 +83,11 @@
     },
     "photoPage": {
         "title": "การเซ็ตค่ารูปภาพ",
+        "size": "เลือกขนาด",
         "sizeAsPercent": "ขนาดเป็น %",
-        "sizeAsFix": "ขนาดเป็น กว้าง x สูง",
+        "sizeAsFix": "ขนาดเป็น กว้าง x ยาว",
         "width": "ความกว้าง",
-        "height": "ความสูง"
+        "height": "ความยาว"
     },
     "progressPage": {
         "title": "การทำงาน",

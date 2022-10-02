@@ -36,7 +36,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      //leading: Image.asset('assets/app.png'),
+      leading: const Icon(Icons.auto_fix_high),
       title: Text(widget.title),
       actions: [
         // Thai language

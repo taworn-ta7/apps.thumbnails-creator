@@ -22,8 +22,9 @@ void main() async {
   LocaleSettings.useDeviceLocale();
   LocaleSettings.setLocaleRaw(Localization.instance().current.languageCode);
 
-  // set window size
+  // set window title and size
   if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowTitle(t.app);
     setWindowMinSize(const Size(400, 600));
     setWindowMaxSize(const Size(800, 1000));
   }

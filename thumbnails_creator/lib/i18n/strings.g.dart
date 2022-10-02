@@ -3,9 +3,9 @@
  * Generated file. Do not edit.
  *
  * Locales: 2
- * Strings: 144 (72.0 per locale)
+ * Strings: 146 (73.0 per locale)
  *
- * Built on 2022-10-02 at 16:05 UTC
+ * Built on 2022-10-02 at 19:31 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -394,6 +394,7 @@ class _StringsValidatorEn {
 	String get isMoney => 'Please input as money.';
 	String isMinLength({required Object min}) => 'Please input length >= $min.';
 	String isMaxLength({required Object max}) => 'Please input length <= $max.';
+	String get isNotBlank => 'Please input non-blank.';
 	String get isEmail => 'Please input as email.';
 	String get isSamePasswords => 'Password and confirm password must be equal.';
 }
@@ -408,7 +409,6 @@ class _StringsErrorEn {
 	String get cantOpenImage => 'Cannot open image file!';
 	String get cantSaveImage => 'Cannot save image file!';
 	String get alreadyExists => 'File is already exists!';
-	String unknown({required Object statusCode}) => 'HTTP error ($statusCode)';
 }
 
 // Path: messageBox
@@ -474,6 +474,7 @@ class _StringsPhotoPageEn {
 
 	// Translations
 	String get title => 'Photo Settings';
+	String get size => 'Sizing';
 	String get sizeAsPercent => 'Size as percent';
 	String get sizeAsFix => 'Size as fix width and height';
 	String get width => 'Width';
@@ -594,6 +595,7 @@ class _StringsValidatorTh implements _StringsValidatorEn {
 	@override String get isMoney => 'กรอกข้อมูล เป็นเลขจำนวนเงิน.';
 	@override String isMinLength({required Object min}) => 'กรอกข้อมูล ความยาว >= $min';
 	@override String isMaxLength({required Object max}) => 'กรอกข้อมูล ความยาว <= $max';
+	@override String get isNotBlank => 'กรอกข้อมูล ไม่เป็นช่องว่าง';
 	@override String get isEmail => 'กรอกข้อมูล เป็นอีเมล';
 	@override String get isSamePasswords => 'รหัสผ่าน และ ยืนยันรหัสผ่าน ต้องเหมือนกัน';
 }
@@ -608,7 +610,6 @@ class _StringsErrorTh implements _StringsErrorEn {
 	@override String get cantOpenImage => 'ไม่สามารถเปิดไฟล์รูปภาพได้!';
 	@override String get cantSaveImage => 'ไม่สามารถเซฟไฟล์รูปภาพได้!';
 	@override String get alreadyExists => 'มีไฟล์นี้อยู่แล้ว!';
-	@override String unknown({required Object statusCode}) => 'เกิดข้อผิดพลาดจาก HTTP ($statusCode)';
 }
 
 // Path: messageBox
@@ -654,7 +655,7 @@ class _StringsLocationPageTh implements _StringsLocationPageEn {
 	@override final _StringsTh _root; // ignore: unused_field
 
 	// Translations
-	@override String get title => 'พาธและไฟล์';
+	@override String get title => 'Directory และไฟล์';
 	@override String get directory => 'Directory';
 	@override String get dirAsSame => 'เหมือนกับต้นทาง';
 	@override String get dirAsFix => 'เลือก directory...';
@@ -674,10 +675,11 @@ class _StringsPhotoPageTh implements _StringsPhotoPageEn {
 
 	// Translations
 	@override String get title => 'การเซ็ตค่ารูปภาพ';
+	@override String get size => 'เลือกขนาด';
 	@override String get sizeAsPercent => 'ขนาดเป็น %';
-	@override String get sizeAsFix => 'ขนาดเป็น กว้าง x สูง';
+	@override String get sizeAsFix => 'ขนาดเป็น กว้าง x ยาว';
 	@override String get width => 'ความกว้าง';
-	@override String get height => 'ความสูง';
+	@override String get height => 'ความยาว';
 }
 
 // Path: progressPage
@@ -737,12 +739,12 @@ extension on _StringsEn {
 			'validator.isMoney': 'Please input as money.',
 			'validator.isMinLength': ({required Object min}) => 'Please input length >= $min.',
 			'validator.isMaxLength': ({required Object max}) => 'Please input length <= $max.',
+			'validator.isNotBlank': 'Please input non-blank.',
 			'validator.isEmail': 'Please input as email.',
 			'validator.isSamePasswords': 'Password and confirm password must be equal.',
 			'error.cantOpenImage': 'Cannot open image file!',
 			'error.cantSaveImage': 'Cannot save image file!',
 			'error.alreadyExists': 'File is already exists!',
-			'error.unknown': ({required Object statusCode}) => 'HTTP error ($statusCode)',
 			'messageBox.info': 'Information',
 			'messageBox.warning': 'Warning',
 			'messageBox.error': 'Error',
@@ -763,6 +765,7 @@ extension on _StringsEn {
 			'locationPage.png': 'PNG',
 			'locationPage.jpeg': 'JPEG',
 			'photoPage.title': 'Photo Settings',
+			'photoPage.size': 'Sizing',
 			'photoPage.sizeAsPercent': 'Size as percent',
 			'photoPage.sizeAsFix': 'Size as fix width and height',
 			'photoPage.width': 'Width',
@@ -816,12 +819,12 @@ extension on _StringsTh {
 			'validator.isMoney': 'กรอกข้อมูล เป็นเลขจำนวนเงิน.',
 			'validator.isMinLength': ({required Object min}) => 'กรอกข้อมูล ความยาว >= $min',
 			'validator.isMaxLength': ({required Object max}) => 'กรอกข้อมูล ความยาว <= $max',
+			'validator.isNotBlank': 'กรอกข้อมูล ไม่เป็นช่องว่าง',
 			'validator.isEmail': 'กรอกข้อมูล เป็นอีเมล',
 			'validator.isSamePasswords': 'รหัสผ่าน และ ยืนยันรหัสผ่าน ต้องเหมือนกัน',
 			'error.cantOpenImage': 'ไม่สามารถเปิดไฟล์รูปภาพได้!',
 			'error.cantSaveImage': 'ไม่สามารถเซฟไฟล์รูปภาพได้!',
 			'error.alreadyExists': 'มีไฟล์นี้อยู่แล้ว!',
-			'error.unknown': ({required Object statusCode}) => 'เกิดข้อผิดพลาดจาก HTTP ($statusCode)',
 			'messageBox.info': 'ข้อมูลข่าวสาร',
 			'messageBox.warning': 'แจ้งเตือน',
 			'messageBox.error': 'เกิดข้อผิดพลาด',
@@ -831,7 +834,7 @@ extension on _StringsTh {
 			'startPage.addFiles': 'เพิ่มไฟล์...',
 			'startPage.clear': 'ลบไฟล์ทั้งหมด',
 			'startPage.about': 'เกี่ยวกับ...',
-			'locationPage.title': 'พาธและไฟล์',
+			'locationPage.title': 'Directory และไฟล์',
 			'locationPage.directory': 'Directory',
 			'locationPage.dirAsSame': 'เหมือนกับต้นทาง',
 			'locationPage.dirAsFix': 'เลือก directory...',
@@ -842,10 +845,11 @@ extension on _StringsTh {
 			'locationPage.png': 'PNG',
 			'locationPage.jpeg': 'JPEG',
 			'photoPage.title': 'การเซ็ตค่ารูปภาพ',
+			'photoPage.size': 'เลือกขนาด',
 			'photoPage.sizeAsPercent': 'ขนาดเป็น %',
-			'photoPage.sizeAsFix': 'ขนาดเป็น กว้าง x สูง',
+			'photoPage.sizeAsFix': 'ขนาดเป็น กว้าง x ยาว',
 			'photoPage.width': 'ความกว้าง',
-			'photoPage.height': 'ความสูง',
+			'photoPage.height': 'ความยาว',
 			'progressPage.title': 'การทำงาน',
 			'progressPage.start': 'เริ่มต้น',
 			'progressPage.restart': 'เริ่มต้นอีกครั้ง',

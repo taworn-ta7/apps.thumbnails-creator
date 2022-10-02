@@ -45,14 +45,14 @@
         "isMoney": "Please input as money.",
         "isMinLength": "Please input length >= $min.",
         "isMaxLength": "Please input length <= $max.",
+        "isNotBlank": "Please input non-blank.",
         "isEmail": "Please input as email.",
         "isSamePasswords": "Password and confirm password must be equal."
     },
     "error": {
         "cantOpenImage": "Cannot open image file!",
         "cantSaveImage": "Cannot save image file!",
-        "alreadyExists": "File is already exists!",
-        "unknown": "HTTP error ($statusCode)"
+        "alreadyExists": "File is already exists!"
     },
     "messageBox": {
         "info": "Information",
@@ -83,6 +83,7 @@
     },
     "photoPage": {
         "title": "Photo Settings",
+        "size": "Sizing",
         "sizeAsPercent": "Size as percent",
         "sizeAsFix": "Size as fix width and height",
         "width": "Width",

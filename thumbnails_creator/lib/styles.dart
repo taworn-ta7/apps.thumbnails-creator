@@ -5,6 +5,9 @@ class Styles {
   static Padding around(Widget child) =>
       Padding(padding: const EdgeInsets.all(32), child: child);
 
+  static Padding aroundLeftRight(Widget child) =>
+      Padding(padding: const EdgeInsets.fromLTRB(24, 0, 24, 0), child: child);
+
   // ----------------------------------------------------------------------
 
   static Padding betweenVertical() =>
