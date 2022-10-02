@@ -78,7 +78,10 @@
         "dirAsFix": "Select directory...",
         "file": "File",
         "fileOutput": "File pattern",
-        "fileHint": "%F - Filename without extension\n%N - Number of trying\n%% - Percent (%) sign"
+        "fileHint": "%F - Filename without extension\n%N - Number of trying\n%% - Percent (%) sign",
+        "type": "Type",
+        "png": "PNG",
+        "jpeg": "JPEG"
     },
     "photoPage": {
         "title": "Photo Settings",

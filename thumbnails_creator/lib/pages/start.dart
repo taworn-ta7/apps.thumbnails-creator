@@ -102,7 +102,7 @@ class _StartState extends State<StartPage> {
             onLeftClick: _about,
             rightIcon: const Icon(Icons.arrow_forward_ios),
             rightText: t.common.next,
-            onRightClick: _nextPage,
+            onRightClick: _items.isEmpty ? null : _nextPage,
           ),
         ],
       ),

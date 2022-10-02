@@ -107,7 +107,7 @@ class _ProgressState extends State<ProgressPage> {
     log.info("images: ${appShare.images.length} file(s)");
     for (var i = 0; i < appShare.images.length; i++) {
       var item = appShare.images[i];
-      log.info(" $i: ${item.source} => ${item.target}");
+      log.info("  ${i + 1}: ${item.source} => ${item.target}");
     }
     log.info("asDir: ${appShare.asDir}");
     log.info("asSize: ${appShare.asSize}");

@@ -5,10 +5,10 @@ import '../styles.dart';
 class CustomButtonBar extends StatefulWidget {
   final Icon leftIcon;
   final String leftText;
-  final void Function() onLeftClick;
+  final void Function()? onLeftClick;
   final Icon rightIcon;
   final String rightText;
-  final void Function() onRightClick;
+  final void Function()? onRightClick;
 
   const CustomButtonBar({
     Key? key,

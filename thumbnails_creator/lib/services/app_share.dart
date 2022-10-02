@@ -47,6 +47,9 @@ class AppShare {
   /// File pattern.
   String filePattern = defaultFileOutput;
 
+  /// File type.
+  int type = 0; // 0 = png, 1 = jpeg
+
   /// Sizing method: false = %, true = fix width/height.
   bool asSize = false;
 

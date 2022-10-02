@@ -34,6 +34,9 @@ class _LocationState extends State<LocationPage> {
   // file
   late TextEditingController _fileEdit;
 
+  // type
+  int _type = 0; // 0 = png, 1 = jpeg
+
   // initial timer handler
   late Timer _initTimer;
 
@@ -138,6 +141,31 @@ class _LocationState extends State<LocationPage> {
                       controller: _fileEdit,
                     ),
                     Text(tr.fileHint),
+
+                    // type
+                    ListTile(
+                      title: Text(tr.type),
+                    ),
+                    RadioListTile<int>(
+                      title: Text(tr.png),
+                      value: 0,
+                      groupValue: _type,
+                      onChanged: (int? value) {
+                        setState(() {
+                          _type = value ?? 0;
+                        });
+                      },
+                    ),
+                    RadioListTile<int>(
+                      title: Text(tr.jpeg),
+                      value: 1,
+                      groupValue: _type,
+                      onChanged: (int? value) {
+                        setState(() {
+                          _type = value ?? 0;
+                        });
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -166,6 +194,7 @@ class _LocationState extends State<LocationPage> {
       _asDir = appShare.asDir;
       _dir = appShare.dir;
       _fileEdit.text = appShare.filePattern;
+      _type = appShare.type;
     });
   }
 
@@ -214,5 +243,6 @@ class _LocationState extends State<LocationPage> {
     appShare.asDir = _asDir;
     appShare.dir = _dir;
     appShare.filePattern = _fileEdit.text;
+    appShare.type = _type;
   }
 }

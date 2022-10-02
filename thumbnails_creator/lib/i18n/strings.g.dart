@@ -3,9 +3,9 @@
  * Generated file. Do not edit.
  *
  * Locales: 2
- * Strings: 134 (67.0 per locale)
+ * Strings: 140 (70.0 per locale)
  *
- * Built on 2022-10-02 at 06:05 UTC
+ * Built on 2022-10-02 at 10:59 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -471,6 +471,9 @@ class _StringsLocationPageEn {
 	String get file => 'File';
 	String get fileOutput => 'File pattern';
 	String get fileHint => '%F - Filename without extension\n%N - Number of trying\n%% - Percent (%) sign';
+	String get type => 'Type';
+	String get png => 'PNG';
+	String get jpeg => 'JPEG';
 }
 
 // Path: photoPage
@@ -676,6 +679,9 @@ class _StringsLocationPageTh implements _StringsLocationPageEn {
 	@override String get file => 'ไฟล์';
 	@override String get fileOutput => 'รูปแบบไฟล์';
 	@override String get fileHint => '%F - ชื่อไฟล์ ไม่รวมนามสกุล\n%N - จำนวนครั้งที่ลอง\n%% - เครื่องหมายเปอร์เซ็นต์ (%)';
+	@override String get type => 'ชนิด';
+	@override String get png => 'PNG';
+	@override String get jpeg => 'JPEG';
 }
 
 // Path: photoPage
@@ -769,6 +775,9 @@ extension on _StringsEn {
 			'locationPage.file': 'File',
 			'locationPage.fileOutput': 'File pattern',
 			'locationPage.fileHint': '%F - Filename without extension\n%N - Number of trying\n%% - Percent (%) sign',
+			'locationPage.type': 'Type',
+			'locationPage.png': 'PNG',
+			'locationPage.jpeg': 'JPEG',
 			'photoPage.title': 'Photo Settings',
 			'photoPage.sizeAsPercent': 'Size as percent',
 			'photoPage.sizeAsFix': 'Size as fix width and height',
@@ -843,6 +852,9 @@ extension on _StringsTh {
 			'locationPage.file': 'ไฟล์',
 			'locationPage.fileOutput': 'รูปแบบไฟล์',
 			'locationPage.fileHint': '%F - ชื่อไฟล์ ไม่รวมนามสกุล\n%N - จำนวนครั้งที่ลอง\n%% - เครื่องหมายเปอร์เซ็นต์ (%)',
+			'locationPage.type': 'ชนิด',
+			'locationPage.png': 'PNG',
+			'locationPage.jpeg': 'JPEG',
 			'photoPage.title': 'การเซ็ตค่ารูปภาพ',
 			'photoPage.sizeAsPercent': 'ขนาดเป็น %',
 			'photoPage.sizeAsFix': 'ขนาดเป็น กว้าง x สูง',
