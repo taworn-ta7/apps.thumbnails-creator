@@ -1,5 +1,7 @@
+import 'dart:io';
 import 'package:logging/logging.dart';
 import 'package:flutter/material.dart';
+import 'package:window_size/window_size.dart';
 import './i18n/strings.g.dart';
 import './services/localization.dart';
 import './app.dart';
@@ -19,6 +21,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   LocaleSettings.useDeviceLocale();
   LocaleSettings.setLocaleRaw(Localization.instance().current.languageCode);
+
+  // set window size
+  if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    setWindowMinSize(const Size(400, 600));
+    setWindowMaxSize(const Size(800, 1000));
+  }
 
   // run app
   runApp(TranslationProvider(child: const App()));
