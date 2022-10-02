@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:logging/logging.dart';
 import '../models/thumbnail.dart';
+import 'types.dart';
 
 /// Application shared service singleton class.
 class AppShare {
@@ -39,20 +40,20 @@ class AppShare {
   /// Image files.
   final images = <Thumbnail>[];
 
-  /// Directory usage: false = same as source, true = choose directory.
-  bool asDir = false;
+  /// Directory usage.
+  DirEnumType dirEnum = DirEnumType.sameAsSource;
 
-  /// Directory name, if asDir = true.
+  /// Directory name.
   String dir = '';
 
   /// File pattern.
   String filePattern = defaultFileOutput;
 
-  /// File type.
-  int type = 0; // 0 = png, 1 = jpeg
+  /// File extension type.
+  ExtEnumType extEnum = ExtEnumType.png;
 
-  /// Sizing method: false = %, true = fix width/height.
-  bool asSize = false;
+  /// Sizing method.
+  SizeEnumType sizeEnum = SizeEnumType.percent;
 
   /// Width, can be % or fix
   int width = 50;

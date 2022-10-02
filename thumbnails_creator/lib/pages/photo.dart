@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import '../i18n/strings.g.dart';
-import '../services/app_share.dart';
 import '../services/localization.dart';
+import '../services/types.dart';
+import '../services/app_share.dart';
 import '../ui/custom_app_bar.dart';
 import '../ui/custom_button_bar.dart';
 import '../styles.dart';
@@ -29,7 +30,7 @@ class _PhotoState extends State<PhotoPage> {
   final _formKey = GlobalKey<FormState>();
 
   // photo
-  bool _asSize = false; // false = %, true = fix width/height
+  SizeEnumType _sizeEnum = SizeEnumType.percent;
 
   // file
   late TextEditingController _widthEdit;
@@ -87,23 +88,23 @@ class _PhotoState extends State<PhotoPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     // size
-                    RadioListTile<bool>(
+                    RadioListTile<SizeEnumType>(
                       title: Text(tr.sizeAsPercent),
-                      value: false,
-                      groupValue: _asSize,
-                      onChanged: (bool? value) {
+                      value: SizeEnumType.percent,
+                      groupValue: _sizeEnum,
+                      onChanged: (SizeEnumType? value) {
                         setState(() {
-                          _asSize = value ?? false;
+                          _sizeEnum = value!;
                         });
                       },
                     ),
-                    RadioListTile<bool>(
+                    RadioListTile<SizeEnumType>(
                       title: Text(tr.sizeAsFix),
-                      value: true,
-                      groupValue: _asSize,
-                      onChanged: (bool? value) {
+                      value: SizeEnumType.fix,
+                      groupValue: _sizeEnum,
+                      onChanged: (SizeEnumType? value) {
                         setState(() {
-                          _asSize = value ?? false;
+                          _sizeEnum = value!;
                         });
                       },
                     ),
@@ -190,7 +191,7 @@ class _PhotoState extends State<PhotoPage> {
   /// A time-consuming initialization.
   Future<void> _handleInit() async {
     setState(() {
-      _asSize = appShare.asSize;
+      _sizeEnum = appShare.sizeEnum;
       _widthEdit.text = appShare.width.toString();
       _heightEdit.text = appShare.height.toString();
     });
@@ -227,7 +228,7 @@ class _PhotoState extends State<PhotoPage> {
 
   /// Copy data to AppShare instance.
   void _copyData() {
-    appShare.asSize = _asSize;
+    appShare.sizeEnum = _sizeEnum;
     appShare.width = int.tryParse(_widthEdit.text) ?? 0;
     appShare.height = int.tryParse(_heightEdit.text) ?? 0;
   }

@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:file_picker/file_picker.dart';
 import '../i18n/strings.g.dart';
-import '../services/app_share.dart';
 import '../services/localization.dart';
+import '../services/types.dart';
+import '../services/app_share.dart';
 import '../ui/custom_app_bar.dart';
 import '../ui/custom_button_bar.dart';
 import '../styles.dart';
@@ -28,14 +29,14 @@ class _LocationState extends State<LocationPage> {
   final _formKey = GlobalKey<FormState>();
 
   // directory
-  bool _asDir = false; // false = same as source, true = choose directory
+  DirEnumType _dirEnum = DirEnumType.sameAsSource;
   String _dir = '';
 
   // file
   late TextEditingController _fileEdit;
 
   // type
-  int _type = 0; // 0 = png, 1 = jpeg
+  ExtEnumType _type = ExtEnumType.png;
 
   // initial timer handler
   late Timer _initTimer;
@@ -89,28 +90,28 @@ class _LocationState extends State<LocationPage> {
                     ListTile(
                       title: Text(tr.directory),
                     ),
-                    RadioListTile<bool>(
+                    RadioListTile<DirEnumType>(
                       title: Text(tr.dirAsSame),
-                      value: false,
-                      groupValue: _asDir,
-                      onChanged: (bool? value) {
+                      value: DirEnumType.sameAsSource,
+                      groupValue: _dirEnum,
+                      onChanged: (DirEnumType? value) {
                         setState(() {
-                          _asDir = value ?? false;
+                          _dirEnum = value!;
                         });
                       },
                     ),
-                    RadioListTile<bool>(
+                    RadioListTile<DirEnumType>(
                       title: Text(tr.dirAsFix),
                       subtitle: Text(_dir),
-                      value: true,
-                      groupValue: _asDir,
+                      value: DirEnumType.chooseDir,
+                      groupValue: _dirEnum,
                       secondary: IconButton(
                         icon: const Icon(Icons.more_horiz),
                         onPressed: _setDirectory,
                       ),
-                      onChanged: (bool? value) {
+                      onChanged: (DirEnumType? value) {
                         setState(() {
-                          _asDir = value ?? false;
+                          _dirEnum = value!;
                         });
                       },
                     ),
@@ -146,23 +147,23 @@ class _LocationState extends State<LocationPage> {
                     ListTile(
                       title: Text(tr.type),
                     ),
-                    RadioListTile<int>(
+                    RadioListTile<ExtEnumType>(
                       title: Text(tr.png),
-                      value: 0,
+                      value: ExtEnumType.png,
                       groupValue: _type,
-                      onChanged: (int? value) {
+                      onChanged: (ExtEnumType? value) {
                         setState(() {
-                          _type = value ?? 0;
+                          _type = value!;
                         });
                       },
                     ),
-                    RadioListTile<int>(
+                    RadioListTile<ExtEnumType>(
                       title: Text(tr.jpeg),
-                      value: 1,
+                      value: ExtEnumType.jpeg,
                       groupValue: _type,
-                      onChanged: (int? value) {
+                      onChanged: (ExtEnumType? value) {
                         setState(() {
-                          _type = value ?? 0;
+                          _type = value!;
                         });
                       },
                     ),
@@ -191,10 +192,10 @@ class _LocationState extends State<LocationPage> {
   /// A time-consuming initialization.
   Future<void> _handleInit() async {
     setState(() {
-      _asDir = appShare.asDir;
+      _dirEnum = appShare.dirEnum;
       _dir = appShare.dir;
       _fileEdit.text = appShare.filePattern;
-      _type = appShare.type;
+      _type = appShare.extEnum;
     });
   }
 
@@ -240,9 +241,9 @@ class _LocationState extends State<LocationPage> {
 
   /// Copy data to AppShare instance.
   void _copyData() {
-    appShare.asDir = _asDir;
+    appShare.dirEnum = _dirEnum;
     appShare.dir = _dir;
     appShare.filePattern = _fileEdit.text;
-    appShare.type = _type;
+    appShare.extEnum = _type;
   }
 }

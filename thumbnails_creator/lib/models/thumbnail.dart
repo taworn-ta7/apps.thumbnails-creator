@@ -1,3 +1,9 @@
+enum ErrorEnumType {
+  cantOpenImage,
+  cantSaveImage,
+  alreadyExists,
+}
+
 /// Thumbnail building item
 class Thumbnail {
   /// Source file to read
@@ -16,7 +22,7 @@ class Thumbnail {
   bool? ok;
 
   /// Error message, if not ok
-  String? error;
+  ErrorEnumType? error;
 
   /// Constructor
   Thumbnail(

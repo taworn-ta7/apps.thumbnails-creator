@@ -8,6 +8,7 @@ import 'package:page_transition/page_transition.dart';
 import '../i18n/strings.g.dart';
 import '../models/thumbnail.dart';
 import '../services/localization.dart';
+import '../services/types.dart';
 import '../services/app_share.dart';
 import '../ui/custom_app_bar.dart';
 import '../ui/custom_button_bar.dart';
@@ -83,10 +84,22 @@ class _ProgressState extends State<ProgressPage> {
             child: ListView(
               children: _items.map((item) {
                 if (item.ok == false) {
+                  late String error;
+                  switch (item.error!) {
+                    case ErrorEnumType.cantOpenImage:
+                      error = t.error.cantOpenImage;
+                      break;
+                    case ErrorEnumType.cantSaveImage:
+                      error = t.error.cantSaveImage;
+                      break;
+                    case ErrorEnumType.alreadyExists:
+                      error = t.error.alreadyExists;
+                      break;
+                  }
                   return ListTile(
                     leading: const Icon(Icons.close),
                     title: Text(item.sourceName),
-                    subtitle: Text(item.error ?? ''),
+                    subtitle: Text(error),
                   );
                 } else if (item.ok == true) {
                   return ListTile(
@@ -217,14 +230,14 @@ class _ProgressState extends State<ProgressPage> {
       }
     }
     if (image == null) {
-      _errorHandle(o, t.error.cantOpenImage);
+      _errorHandle(o, ErrorEnumType.cantOpenImage);
       log.warning("#$index: ${o.error}");
       return;
     }
 
     // reduces image, get size
     late int w, h;
-    if (!appShare.asSize) {
+    if (appShare.sizeEnum == SizeEnumType.percent) {
       // size as %
       w = appShare.width * image.width ~/ 100;
       h = appShare.height * image.height ~/ 100;
@@ -244,14 +257,14 @@ class _ProgressState extends State<ProgressPage> {
       thumbnail = null;
     }
     if (thumbnail == null) {
-      _errorHandle(o, t.error.cantSaveImage);
+      _errorHandle(o, ErrorEnumType.cantSaveImage);
       log.warning("#$index: ${o.error}");
       return;
     }
 
     // output directory
     late String dir;
-    if (!appShare.asDir) {
+    if (appShare.dirEnum == DirEnumType.sameAsSource) {
       // same as source
       dir = sourceFile.parent.path;
       log.info("#$index: same as source, dir=$dir");
@@ -263,11 +276,11 @@ class _ProgressState extends State<ProgressPage> {
 
     // output file type
     late String ext;
-    switch (appShare.type) {
-      case 1:
+    switch (appShare.extEnum) {
+      case ExtEnumType.jpeg:
         ext = 'jpeg';
         break;
-      case 0:
+      case ExtEnumType.png:
       default:
         ext = 'png';
         break;
@@ -297,17 +310,17 @@ class _ProgressState extends State<ProgressPage> {
       retry++;
     }
     if (exists) {
-      _errorHandle(o, t.error.alreadyExists);
+      _errorHandle(o, ErrorEnumType.alreadyExists);
       log.warning("#$index: ${o.error}");
       return;
     }
 
     // output to file
-    switch (appShare.type) {
-      case 1:
+    switch (appShare.extEnum) {
+      case ExtEnumType.jpeg:
         await File(filePath).writeAsBytes(encodeJpg(thumbnail));
         break;
-      case 0:
+      case ExtEnumType.png:
       default:
         await File(filePath).writeAsBytes(encodePng(thumbnail));
         break;
@@ -322,7 +335,7 @@ class _ProgressState extends State<ProgressPage> {
   }
 
   /// Error handling.
-  void _errorHandle(Thumbnail o, String error) {
+  void _errorHandle(Thumbnail o, ErrorEnumType error) {
     setState(() {
       o.ok = false;
       o.error = error;
