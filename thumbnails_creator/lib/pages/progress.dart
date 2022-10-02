@@ -6,7 +6,7 @@ import '../models/thumbnail.dart';
 import '../services/localization.dart';
 import '../services/app_share.dart';
 import '../ui/custom_app_bar.dart';
-import '../ui/custom_bottom_bar.dart';
+import '../ui/custom_button_bar.dart';
 import '../pages.dart';
 
 /// ProgressPage class.
@@ -77,7 +77,7 @@ class _ProgressState extends State<ProgressPage> {
           ),
 
           // bottom bar
-          CustomBottomBar(
+          CustomButtonBar(
             leftIcon: const Icon(Icons.arrow_back_ios),
             leftText: t.common.back,
             onLeftClick: () => Navigator.popAndPushNamed(context, Pages.photo),

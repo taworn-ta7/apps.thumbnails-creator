@@ -3,14 +3,16 @@ import 'package:intl/intl.dart';
 import 'package:logging/logging.dart';
 import 'package:byte_converter/byte_converter.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:file_picker/file_picker.dart';
 import '../i18n/strings.g.dart';
+import '../widgets/message_box.dart';
 import '../models/thumbnail.dart';
 import '../services/localization.dart';
 import '../services/app_share.dart';
 import '../ui/custom_app_bar.dart';
-import '../ui/custom_bottom_bar.dart';
-import '../pages.dart';
+import '../ui/custom_button_bar.dart';
+import 'location.dart';
 
 /// StartPage class.
 class StartPage extends StatefulWidget {
@@ -67,6 +69,16 @@ class _StartState extends State<StartPage> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          // top bar
+          CustomButtonBar(
+            leftIcon: const Icon(Icons.image_search),
+            leftText: tr.addFiles,
+            onLeftClick: _addFiles,
+            rightIcon: const Icon(Icons.clear),
+            rightText: tr.clear,
+            onRightClick: _clear,
+          ),
+
           // list view
           Expanded(
             child: ListView(
@@ -84,10 +96,10 @@ class _StartState extends State<StartPage> {
           ),
 
           // bottom bar
-          CustomBottomBar(
-            leftIcon: const Icon(Icons.image_search),
-            leftText: tr.addFiles,
-            onLeftClick: _addFiles,
+          CustomButtonBar(
+            leftIcon: const Icon(Icons.auto_fix_high),
+            leftText: tr.about,
+            onLeftClick: _about,
             rightIcon: const Icon(Icons.arrow_forward_ios),
             rightText: t.common.next,
             onRightClick: _nextPage,
@@ -159,6 +171,20 @@ class _StartState extends State<StartPage> {
     }
   }
 
+  /// Clears all files in list.
+  Future<void> _clear() async {
+    setState(() {
+      _items.clear();
+      log.info("clear all file(s)");
+      log.info("total ${_items.length} file(s)");
+    });
+  }
+
+  /// Display about dialog box.
+  Future<void> _about() async {
+    MessageBox.info(context, "${t.app}, ${t.versionText}");
+  }
+
   /// Next page.
   Future<void> _nextPage() async {
     if (_items.isEmpty) return;
@@ -169,6 +195,15 @@ class _StartState extends State<StartPage> {
       images.add(_items[i]);
     }
 
-    Navigator.popAndPushNamed(context, Pages.location);
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeft,
+        child: const LocationPage(),
+      ),
+    );
+
+    //Navigator.popAndPushNamed(context, Pages.location);
   }
 }

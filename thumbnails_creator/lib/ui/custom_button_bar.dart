@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../styles.dart';
 
-/// Bottom bar with left and right buttons.
-class CustomBottomBar extends StatefulWidget {
+/// Bar with left and right buttons.
+class CustomButtonBar extends StatefulWidget {
   final Icon leftIcon;
   final String leftText;
   final void Function() onLeftClick;
@@ -10,7 +10,7 @@ class CustomBottomBar extends StatefulWidget {
   final String rightText;
   final void Function() onRightClick;
 
-  const CustomBottomBar({
+  const CustomButtonBar({
     Key? key,
     required this.leftIcon,
     required this.leftText,
@@ -21,10 +21,10 @@ class CustomBottomBar extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CustomBottomBar> createState() => _CustomBottomBarState();
+  State<CustomButtonBar> createState() => _CustomButtonBarState();
 }
 
-class _CustomBottomBarState extends State<CustomBottomBar> {
+class _CustomButtonBarState extends State<CustomButtonBar> {
   @override
   void initState() {
     super.initState();

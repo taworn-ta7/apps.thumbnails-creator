@@ -1,5 +1,7 @@
 {
     "app": "Thumbnails Creator",
+    "version": "1.0.0",
+    "versionText": "version @:version",
     "switchLocale": {
         "en": "Change Language to English",
         "th": "Change Language to ไทย"
@@ -65,7 +67,9 @@
     },
     "startPage": {
         "title": "@:app",
-        "addFiles": "Add File(s)..."
+        "addFiles": "Add File(s)...",
+        "clear": "Clear",
+        "about": "About..."
     },
     "locationPage": {
         "title": "Directory and File",

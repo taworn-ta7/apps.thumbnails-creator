@@ -6,7 +6,7 @@ import '../i18n/strings.g.dart';
 import '../services/app_share.dart';
 import '../services/localization.dart';
 import '../ui/custom_app_bar.dart';
-import '../ui/custom_bottom_bar.dart';
+import '../ui/custom_button_bar.dart';
 import '../styles.dart';
 import '../pages.dart';
 
@@ -143,7 +143,7 @@ class _LocationState extends State<LocationPage> {
           ),
 
           // bottom bar
-          CustomBottomBar(
+          CustomButtonBar(
             leftIcon: const Icon(Icons.arrow_back_ios),
             leftText: t.common.back,
             onLeftClick: () => Navigator.popAndPushNamed(context, ''),

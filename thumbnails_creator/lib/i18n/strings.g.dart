@@ -3,9 +3,9 @@
  * Generated file. Do not edit.
  *
  * Locales: 2
- * Strings: 126 (63.0 per locale)
+ * Strings: 134 (67.0 per locale)
  *
- * Built on 2022-10-01 at 20:45 UTC
+ * Built on 2022-10-02 at 06:05 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -309,6 +309,8 @@ class _StringsEn {
 
 	// Translations
 	String get app => 'Thumbnails Creator';
+	String get version => '1.0.0';
+	String get versionText => 'version ${_root.version}';
 	late final _StringsSwitchLocaleEn switchLocale = _StringsSwitchLocaleEn._(_root);
 	late final _StringsCommonEn common = _StringsCommonEn._(_root);
 	late final _StringsQuestionEn question = _StringsQuestionEn._(_root);
@@ -451,6 +453,8 @@ class _StringsStartPageEn {
 	// Translations
 	String get title => '${_root.app}';
 	String get addFiles => 'Add File(s)...';
+	String get clear => 'Clear';
+	String get about => 'About...';
 }
 
 // Path: locationPage
@@ -510,6 +514,8 @@ class _StringsTh implements _StringsEn {
 
 	// Translations
 	@override String get app => 'Thumbnails Creator';
+	@override String get version => '1.0.0';
+	@override String get versionText => 'รุ่น ${_root.version}';
 	@override late final _StringsSwitchLocaleTh switchLocale = _StringsSwitchLocaleTh._(_root);
 	@override late final _StringsCommonTh common = _StringsCommonTh._(_root);
 	@override late final _StringsQuestionTh question = _StringsQuestionTh._(_root);
@@ -652,6 +658,8 @@ class _StringsStartPageTh implements _StringsStartPageEn {
 	// Translations
 	@override String get title => '${_root.app}';
 	@override String get addFiles => 'เพิ่มไฟล์...';
+	@override String get clear => 'ลบไฟล์ทั้งหมด';
+	@override String get about => 'เกี่ยวกับ...';
 }
 
 // Path: locationPage
@@ -701,6 +709,8 @@ extension on _StringsEn {
 	Map<String, dynamic> _buildFlatMap() {
 		return <String, dynamic>{
 			'app': 'Thumbnails Creator',
+			'version': '1.0.0',
+			'versionText': 'version ${_root.version}',
 			'switchLocale.en': 'Change Language to English',
 			'switchLocale.th': 'Change Language to ไทย',
 			'common.close': 'Close',
@@ -750,6 +760,8 @@ extension on _StringsEn {
 			'imageChooser.revert': 'Revert',
 			'startPage.title': '${_root.app}',
 			'startPage.addFiles': 'Add File(s)...',
+			'startPage.clear': 'Clear',
+			'startPage.about': 'About...',
 			'locationPage.title': 'Directory and File',
 			'locationPage.directory': 'Directory',
 			'locationPage.dirAsSame': 'Same as source images',
@@ -771,6 +783,8 @@ extension on _StringsTh {
 	Map<String, dynamic> _buildFlatMap() {
 		return <String, dynamic>{
 			'app': 'Thumbnails Creator',
+			'version': '1.0.0',
+			'versionText': 'รุ่น ${_root.version}',
 			'switchLocale.en': 'สลับภาษาเป็น English',
 			'switchLocale.th': 'สลับภาษาเป็น ไทย',
 			'common.close': 'ปิด',
@@ -820,6 +834,8 @@ extension on _StringsTh {
 			'imageChooser.revert': 'ย้อนกลับ',
 			'startPage.title': '${_root.app}',
 			'startPage.addFiles': 'เพิ่มไฟล์...',
+			'startPage.clear': 'ลบไฟล์ทั้งหมด',
+			'startPage.about': 'เกี่ยวกับ...',
 			'locationPage.title': 'พาธและไฟล์',
 			'locationPage.directory': 'Directory',
 			'locationPage.dirAsSame': 'เหมือนกับต้นทาง',
