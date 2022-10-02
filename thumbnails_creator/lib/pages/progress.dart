@@ -331,7 +331,7 @@ class _ProgressState extends State<ProgressPage> {
       o.ok = true;
     });
     log.info("#$index: ok :)");
-    _startTimer = Timer(const Duration(milliseconds: 500), _convert);
+    _startTimer = Timer(const Duration(milliseconds: 250), _convert);
   }
 
   /// Error handling.
@@ -340,6 +340,6 @@ class _ProgressState extends State<ProgressPage> {
       o.ok = false;
       o.error = error;
     });
-    _startTimer = Timer(const Duration(milliseconds: 500), _convert);
+    _startTimer = Timer(const Duration(milliseconds: 250), _convert);
   }
 }
