@@ -1,13 +1,15 @@
 import 'dart:async';
 import 'package:logging/logging.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import '../i18n/strings.g.dart';
 import '../models/thumbnail.dart';
 import '../services/localization.dart';
 import '../services/app_share.dart';
 import '../ui/custom_app_bar.dart';
 import '../ui/custom_button_bar.dart';
-import '../pages.dart';
+import 'photo.dart';
+import 'start.dart';
 
 /// ProgressPage class.
 class ProgressPage extends StatefulWidget {
@@ -80,7 +82,7 @@ class _ProgressState extends State<ProgressPage> {
           CustomButtonBar(
             leftIcon: const Icon(Icons.arrow_back_ios),
             leftText: t.common.back,
-            onLeftClick: () => Navigator.popAndPushNamed(context, Pages.photo),
+            onLeftClick: _previousPage,
             rightIcon: const Icon(Icons.arrow_forward_ios),
             rightText: t.common.next,
             onRightClick: _nextPage,
@@ -111,8 +113,33 @@ class _ProgressState extends State<ProgressPage> {
     log.info("asSize: ${appShare.asSize}");
   }
 
+  /// Previous page.
+  Future<void> _previousPage() async {
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      PageTransition(
+        type: PageTransitionType.leftToRightWithFade,
+        child: const PhotoPage(),
+      ),
+    );
+  }
+
   /// Next page.
   Future<void> _nextPage() async {
-    Navigator.popAndPushNamed(context, '');
+    // NOTE:
+    // create thumbnails
+    //
+
+    appShare.clear();
+
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeftWithFade,
+        child: const StartPage(),
+      ),
+    );
   }
 }

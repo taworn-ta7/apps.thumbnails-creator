@@ -21,11 +21,19 @@ class AppShare {
         Platform.environment['USERPROFILE'] ??
         '';
     log.info("home directory: $dir");
+    clear();
   }
 
   // ----------------------------------------------------------------------
 
-  static const defaultFileOutput = '%F_thumb%N';
+  /// Clears data to reset.
+  void clear() {
+    images.clear();
+  }
+
+  // ----------------------------------------------------------------------
+
+  static const defaultFileOutput = '%F-thumb%N';
 
   /// Image files.
   final images = <Thumbnail>[];

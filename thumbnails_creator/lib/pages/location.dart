@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:logging/logging.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:file_picker/file_picker.dart';
 import '../i18n/strings.g.dart';
 import '../services/app_share.dart';
@@ -8,7 +9,8 @@ import '../services/localization.dart';
 import '../ui/custom_app_bar.dart';
 import '../ui/custom_button_bar.dart';
 import '../styles.dart';
-import '../pages.dart';
+import 'start.dart';
+import 'photo.dart';
 
 /// LocationPage class.
 class LocationPage extends StatefulWidget {
@@ -146,7 +148,7 @@ class _LocationState extends State<LocationPage> {
           CustomButtonBar(
             leftIcon: const Icon(Icons.arrow_back_ios),
             leftText: t.common.back,
-            onLeftClick: () => Navigator.popAndPushNamed(context, ''),
+            onLeftClick: _previousPage,
             rightIcon: const Icon(Icons.arrow_forward_ios),
             rightText: t.common.next,
             onRightClick: _nextPage,
@@ -178,14 +180,39 @@ class _LocationState extends State<LocationPage> {
     }
   }
 
+  /// Previous page.
+  Future<void> _previousPage() async {
+    _copyData();
+
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      PageTransition(
+        type: PageTransitionType.leftToRightWithFade,
+        child: const StartPage(),
+      ),
+    );
+  }
+
   /// Next page.
   Future<void> _nextPage() async {
     if (!_formKey.currentState!.validate()) return;
+    _copyData();
 
+    Navigator.pop(context);
+    Navigator.push(
+      context,
+      PageTransition(
+        type: PageTransitionType.rightToLeftWithFade,
+        child: const PhotoPage(),
+      ),
+    );
+  }
+
+  /// Copy data to AppShare instance.
+  void _copyData() {
     appShare.asDir = _asDir;
     appShare.dir = _dir;
     appShare.filePattern = _fileEdit.text;
-
-    Navigator.popAndPushNamed(context, Pages.photo);
   }
 }

@@ -4,11 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:page_transition/page_transition.dart';
 import './i18n/strings.g.dart';
 import './services/localization.dart';
-import './pages.dart';
 import './pages/start.dart';
-import './pages/location.dart';
-import './pages/photo.dart';
-import './pages/progress.dart';
 
 /// App class.
 class App extends StatefulWidget {
@@ -59,27 +55,6 @@ class _AppState extends State<App> {
         const transition = PageTransitionType.bottomToTop;
         var path = settings.name ?? '';
         switch (path) {
-          case Pages.location:
-            return PageTransition(
-              type: transition,
-              settings: settings,
-              child: const LocationPage(),
-            );
-
-          case Pages.photo:
-            return PageTransition(
-              type: transition,
-              settings: settings,
-              child: const PhotoPage(),
-            );
-
-          case Pages.progress:
-            return PageTransition(
-              type: transition,
-              settings: settings,
-              child: const ProgressPage(),
-            );
-
           case '/':
           case '':
             return PageTransition(

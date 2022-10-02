@@ -188,22 +188,24 @@ class _StartState extends State<StartPage> {
   /// Next page.
   Future<void> _nextPage() async {
     if (_items.isEmpty) return;
-
-    var images = appShare.images;
-    images.clear();
-    for (var i = 0; i < _items.length; i++) {
-      images.add(_items[i]);
-    }
+    _copyData();
 
     Navigator.pop(context);
     Navigator.push(
       context,
       PageTransition(
-        type: PageTransitionType.rightToLeft,
+        type: PageTransitionType.rightToLeftWithFade,
         child: const LocationPage(),
       ),
     );
+  }
 
-    //Navigator.popAndPushNamed(context, Pages.location);
+  /// Copy data to AppShare instance.
+  void _copyData() {
+    var images = appShare.images;
+    images.clear();
+    for (var i = 0; i < _items.length; i++) {
+      images.add(_items[i]);
+    }
   }
 }
