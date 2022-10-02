@@ -3,9 +3,9 @@
  * Generated file. Do not edit.
  *
  * Locales: 2
- * Strings: 142 (71.0 per locale)
+ * Strings: 144 (72.0 per locale)
  *
- * Built on 2022-10-02 at 11:41 UTC
+ * Built on 2022-10-02 at 16:05 UTC
  */
 
 import 'package:flutter/widgets.dart';
@@ -318,7 +318,6 @@ class _StringsEn {
 	late final _StringsErrorEn error = _StringsErrorEn._(_root);
 	late final _StringsMessageBoxEn messageBox = _StringsMessageBoxEn._(_root);
 	late final _StringsWaitBoxEn waitBox = _StringsWaitBoxEn._(_root);
-	late final _StringsImageChooserEn imageChooser = _StringsImageChooserEn._(_root);
 	late final _StringsStartPageEn startPage = _StringsStartPageEn._(_root);
 	late final _StringsLocationPageEn locationPage = _StringsLocationPageEn._(_root);
 	late final _StringsPhotoPageEn photoPage = _StringsPhotoPageEn._(_root);
@@ -407,6 +406,8 @@ class _StringsErrorEn {
 
 	// Translations
 	String get cantOpenImage => 'Cannot open image file!';
+	String get cantSaveImage => 'Cannot save image file!';
+	String get alreadyExists => 'File is already exists!';
 	String unknown({required Object statusCode}) => 'HTTP error ($statusCode)';
 }
 
@@ -431,18 +432,6 @@ class _StringsWaitBoxEn {
 
 	// Translations
 	String get message => 'Please wait...';
-}
-
-// Path: imageChooser
-class _StringsImageChooserEn {
-	_StringsImageChooserEn._(this._root);
-
-	final _StringsEn _root; // ignore: unused_field
-
-	// Translations
-	String get upload => 'Upload';
-	String get reset => 'Reset';
-	String get revert => 'Revert';
 }
 
 // Path: startPage
@@ -499,6 +488,8 @@ class _StringsProgressPageEn {
 
 	// Translations
 	String get title => 'Progress';
+	String get start => 'Start';
+	String get restart => 'Restart';
 }
 
 // Path: <root>
@@ -527,7 +518,6 @@ class _StringsTh implements _StringsEn {
 	@override late final _StringsErrorTh error = _StringsErrorTh._(_root);
 	@override late final _StringsMessageBoxTh messageBox = _StringsMessageBoxTh._(_root);
 	@override late final _StringsWaitBoxTh waitBox = _StringsWaitBoxTh._(_root);
-	@override late final _StringsImageChooserTh imageChooser = _StringsImageChooserTh._(_root);
 	@override late final _StringsStartPageTh startPage = _StringsStartPageTh._(_root);
 	@override late final _StringsLocationPageTh locationPage = _StringsLocationPageTh._(_root);
 	@override late final _StringsPhotoPageTh photoPage = _StringsPhotoPageTh._(_root);
@@ -616,6 +606,8 @@ class _StringsErrorTh implements _StringsErrorEn {
 
 	// Translations
 	@override String get cantOpenImage => 'ไม่สามารถเปิดไฟล์รูปภาพได้!';
+	@override String get cantSaveImage => 'ไม่สามารถเซฟไฟล์รูปภาพได้!';
+	@override String get alreadyExists => 'มีไฟล์นี้อยู่แล้ว!';
 	@override String unknown({required Object statusCode}) => 'เกิดข้อผิดพลาดจาก HTTP ($statusCode)';
 }
 
@@ -640,18 +632,6 @@ class _StringsWaitBoxTh implements _StringsWaitBoxEn {
 
 	// Translations
 	@override String get message => 'โปรดรอสักครู่...';
-}
-
-// Path: imageChooser
-class _StringsImageChooserTh implements _StringsImageChooserEn {
-	_StringsImageChooserTh._(this._root);
-
-	@override final _StringsTh _root; // ignore: unused_field
-
-	// Translations
-	@override String get upload => 'อัพโหลด';
-	@override String get reset => 'รีเซ็ต';
-	@override String get revert => 'ย้อนกลับ';
 }
 
 // Path: startPage
@@ -708,6 +688,8 @@ class _StringsProgressPageTh implements _StringsProgressPageEn {
 
 	// Translations
 	@override String get title => 'การทำงาน';
+	@override String get start => 'เริ่มต้น';
+	@override String get restart => 'เริ่มต้นอีกครั้ง';
 }
 
 /// Flat map(s) containing all translations.
@@ -758,15 +740,14 @@ extension on _StringsEn {
 			'validator.isEmail': 'Please input as email.',
 			'validator.isSamePasswords': 'Password and confirm password must be equal.',
 			'error.cantOpenImage': 'Cannot open image file!',
+			'error.cantSaveImage': 'Cannot save image file!',
+			'error.alreadyExists': 'File is already exists!',
 			'error.unknown': ({required Object statusCode}) => 'HTTP error ($statusCode)',
 			'messageBox.info': 'Information',
 			'messageBox.warning': 'Warning',
 			'messageBox.error': 'Error',
 			'messageBox.question': 'Question',
 			'waitBox.message': 'Please wait...',
-			'imageChooser.upload': 'Upload',
-			'imageChooser.reset': 'Reset',
-			'imageChooser.revert': 'Revert',
 			'startPage.title': '${_root.app}',
 			'startPage.addFiles': 'Add File(s)...',
 			'startPage.clear': 'Clear',
@@ -787,6 +768,8 @@ extension on _StringsEn {
 			'photoPage.width': 'Width',
 			'photoPage.height': 'Height',
 			'progressPage.title': 'Progress',
+			'progressPage.start': 'Start',
+			'progressPage.restart': 'Restart',
 		};
 	}
 }
@@ -836,15 +819,14 @@ extension on _StringsTh {
 			'validator.isEmail': 'กรอกข้อมูล เป็นอีเมล',
 			'validator.isSamePasswords': 'รหัสผ่าน และ ยืนยันรหัสผ่าน ต้องเหมือนกัน',
 			'error.cantOpenImage': 'ไม่สามารถเปิดไฟล์รูปภาพได้!',
+			'error.cantSaveImage': 'ไม่สามารถเซฟไฟล์รูปภาพได้!',
+			'error.alreadyExists': 'มีไฟล์นี้อยู่แล้ว!',
 			'error.unknown': ({required Object statusCode}) => 'เกิดข้อผิดพลาดจาก HTTP ($statusCode)',
 			'messageBox.info': 'ข้อมูลข่าวสาร',
 			'messageBox.warning': 'แจ้งเตือน',
 			'messageBox.error': 'เกิดข้อผิดพลาด',
 			'messageBox.question': 'คำถาม',
 			'waitBox.message': 'โปรดรอสักครู่...',
-			'imageChooser.upload': 'อัพโหลด',
-			'imageChooser.reset': 'รีเซ็ต',
-			'imageChooser.revert': 'ย้อนกลับ',
 			'startPage.title': '${_root.app}',
 			'startPage.addFiles': 'เพิ่มไฟล์...',
 			'startPage.clear': 'ลบไฟล์ทั้งหมด',
@@ -865,6 +847,8 @@ extension on _StringsTh {
 			'photoPage.width': 'ความกว้าง',
 			'photoPage.height': 'ความสูง',
 			'progressPage.title': 'การทำงาน',
+			'progressPage.start': 'เริ่มต้น',
+			'progressPage.restart': 'เริ่มต้นอีกครั้ง',
 		};
 	}
 }

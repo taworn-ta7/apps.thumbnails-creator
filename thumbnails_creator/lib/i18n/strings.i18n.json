@@ -50,6 +50,8 @@
     },
     "error": {
         "cantOpenImage": "Cannot open image file!",
+        "cantSaveImage": "Cannot save image file!",
+        "alreadyExists": "File is already exists!",
         "unknown": "HTTP error ($statusCode)"
     },
     "messageBox": {
@@ -60,11 +62,6 @@
     },
     "waitBox": {
         "message": "Please wait..."
-    },
-    "imageChooser": {
-        "upload": "Upload",
-        "reset": "Reset",
-        "revert": "Revert"
     },
     "startPage": {
         "title": "@:app",
@@ -92,6 +89,8 @@
         "height": "Height"
     },
     "progressPage": {
-        "title": "Progress"
+        "title": "Progress",
+        "start": "Start",
+        "restart": "Restart"
     }
 }

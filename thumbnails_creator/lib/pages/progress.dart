@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:path/path.dart' as path;
 import 'package:logging/logging.dart';
 import 'package:image/image.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Image;
 import 'package:page_transition/page_transition.dart';
 import '../i18n/strings.g.dart';
 import '../models/thumbnail.dart';
@@ -37,7 +37,7 @@ class _ProgressState extends State<ProgressPage> {
   bool _finish = false;
 
   // start timer
-  late Timer? _startTimer;
+  Timer? _startTimer;
 
   // initial timer handler
   late Timer _initTimer;
@@ -82,11 +82,25 @@ class _ProgressState extends State<ProgressPage> {
           Expanded(
             child: ListView(
               children: _items.map((item) {
-                return ListTile(
-                  leading: const Icon(Icons.photo_size_select_large),
-                  title: Text(item.sourceName),
-                  subtitle: const Text(''),
-                );
+                if (item.ok == false) {
+                  return ListTile(
+                    leading: const Icon(Icons.close),
+                    title: Text(item.sourceName),
+                    subtitle: Text(item.error ?? ''),
+                  );
+                } else if (item.ok == true) {
+                  return ListTile(
+                    leading: const Icon(Icons.check),
+                    title: Text(item.sourceName),
+                    subtitle: Text(item.target ?? ''),
+                  );
+                } else {
+                  return ListTile(
+                    leading: const Icon(Icons.photo_size_select_large),
+                    title: Text(item.sourceName),
+                    subtitle: const Text(''),
+                  );
+                }
               }).toList(),
             ),
           ),
@@ -95,11 +109,13 @@ class _ProgressState extends State<ProgressPage> {
           CustomButtonBar(
             leftIcon: const Icon(Icons.arrow_back_ios),
             leftText: t.common.back,
-            //onLeftClick: _start == null ? _previousPage : null,
-            onLeftClick: _previousPage,
-            rightIcon: const Icon(Icons.arrow_forward_ios),
-            rightText: t.common.next,
-            onRightClick: _nextPage,
+            onLeftClick: _start == null ? _previousPage : null,
+            rightIcon: !_finish
+                ? const Icon(Icons.play_arrow)
+                : const Icon(Icons.restart_alt),
+            rightText: !_finish ? tr.start : tr.restart,
+            onRightClick:
+                _start == null ? _nextPage : (!_finish ? null : _nextPage),
           ),
         ],
       ),
@@ -140,7 +156,20 @@ class _ProgressState extends State<ProgressPage> {
   /// Next page.
   Future<void> _nextPage() async {
     if (_start == null) {
-      _start = 0;
+      /* testing
+      late Thumbnail o;
+      setState(() {
+        o = _items[0];
+      });
+      setState(() {
+        o.ok = false;
+        o.error = 'err';
+      });
+      */
+
+      setState(() {
+        _start = 0;
+      });
       _startTimer = Timer(const Duration(milliseconds: 1), _convert);
     } else if (_finish) {
       appShare.clear();
@@ -158,21 +187,38 @@ class _ProgressState extends State<ProgressPage> {
 
   /// Processes the image file.
   Future<void> _convert() async {
+    if (_start! >= appShare.images.length) {
+      setState(() {
+        _finish = true;
+      });
+      return;
+    }
+
     // get current thumbnail
-    var o = appShare.images[_start!];
+    var index = _start!;
     _start = _start! + 1;
-    log.info("index ${_start!}: ${o.source}");
+    late Thumbnail o;
+    setState(() {
+      o = _items[index];
+    });
+    log.info("#$index: ${o.source}");
 
     // get image source
     var sourceFile = File(o.source);
-    var sourceBase = path.basenameWithoutExtension(o.source);
-    var sourceExt = path.extension(o.source);
+    var basename = path.basenameWithoutExtension(o.source);
     var data = await sourceFile.readAsBytes();
-    var image = decodeImage(data);
+    Image? image;
+    if (data.isNotEmpty) {
+      try {
+        image = decodeImage(data);
+      } catch (ex) {
+        log.warning(ex);
+        image = null;
+      }
+    }
     if (image == null) {
-      o.ok = false;
-      o.error = t.error.cantOpenImage;
-      log.warning("index ${_start!}: ${o.error}");
+      _errorHandle(o, t.error.cantOpenImage);
+      log.warning("#$index: ${o.error}");
       return;
     }
 
@@ -182,27 +228,37 @@ class _ProgressState extends State<ProgressPage> {
       // size as %
       w = appShare.width * image.width ~/ 100;
       h = appShare.height * image.height ~/ 100;
-      log.info("index ${_start!}: as %, width=$w, height=$h");
+      log.info("#$index: size as %, width=$w, height=$h");
     } else {
       // size as fix
       w = appShare.width;
       h = appShare.height;
-      log.info("index ${_start!}: as fix, width=$w, height=$h");
+      log.info("#$index: size as fix, width=$w, height=$h");
     }
 
     // make thumbnail
-    var thumbnail = copyResize(image, width: w, height: h);
+    Image? thumbnail;
+    try {
+      thumbnail = copyResize(image, width: w, height: h);
+    } on Exception {
+      thumbnail = null;
+    }
+    if (thumbnail == null) {
+      _errorHandle(o, t.error.cantSaveImage);
+      log.warning("#$index: ${o.error}");
+      return;
+    }
 
     // output directory
     late String dir;
     if (!appShare.asDir) {
       // same as source
       dir = sourceFile.parent.path;
-      log.info("index ${_start!}: same as source, dir=$dir");
+      log.info("#$index: same as source, dir=$dir");
     } else {
       // directory fix
       dir = appShare.dir;
-      log.info("index ${_start!}: fix directory, dir=$dir");
+      log.info("#$index: fix directory, dir=$dir");
     }
 
     // output file type
@@ -216,7 +272,6 @@ class _ProgressState extends State<ProgressPage> {
         ext = 'png';
         break;
     }
-    log.info("index ${_start!}: ext=$ext");
 
     // output file name
     var filePath = '';
@@ -226,7 +281,7 @@ class _ProgressState extends State<ProgressPage> {
       var fileName = appShare.filePattern.replaceAllMapped(re, (match) {
         switch (match[1]) {
           case 'F':
-            return sourceBase;
+            return basename;
           case 'N':
             return retry <= 0 ? '' : retry.toString();
           case '%':
@@ -234,20 +289,16 @@ class _ProgressState extends State<ProgressPage> {
         }
         return '';
       });
-      log.info("index ${_start!}: $fileName");
       filePath = path.join(dir, '$fileName.$ext');
-      log.info("index ${_start!}: $filePath");
       exists = await File(filePath).exists();
-      log.info("index ${_start!}: $exists");
+      log.info("#$index: $filePath, exists=$exists");
       if (!exists) break;
-      if (retry >= 10) break;
+      if (retry >= AppShare.maxRetry) break;
       retry++;
     }
-
     if (exists) {
-      o.ok = false;
-      o.error = 'error exists';
-      log.warning("index ${_start!}: ${o.error}");
+      _errorHandle(o, t.error.alreadyExists);
+      log.warning("#$index: ${o.error}");
       return;
     }
 
@@ -262,6 +313,20 @@ class _ProgressState extends State<ProgressPage> {
         break;
     }
 
-    log.info("index ${_start!}: ok :)");
+    setState(() {
+      o.target = filePath;
+      o.ok = true;
+    });
+    log.info("#$index: ok :)");
+    _startTimer = Timer(const Duration(milliseconds: 500), _convert);
+  }
+
+  /// Error handling.
+  void _errorHandle(Thumbnail o, String error) {
+    setState(() {
+      o.ok = false;
+      o.error = error;
+    });
+    _startTimer = Timer(const Duration(milliseconds: 500), _convert);
   }
 }

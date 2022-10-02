@@ -50,6 +50,8 @@
     },
     "error": {
         "cantOpenImage": "ไม่สามารถเปิดไฟล์รูปภาพได้!",
+        "cantSaveImage": "ไม่สามารถเซฟไฟล์รูปภาพได้!",
+        "alreadyExists": "มีไฟล์นี้อยู่แล้ว!",
         "unknown": "เกิดข้อผิดพลาดจาก HTTP ($statusCode)"
     },
     "messageBox": {
@@ -60,11 +62,6 @@
     },
     "waitBox": {
         "message": "โปรดรอสักครู่..."
-    },
-    "imageChooser": {
-        "upload": "อัพโหลด",
-        "reset": "รีเซ็ต",
-        "revert": "ย้อนกลับ"
     },
     "startPage": {
         "title": "@:app",
@@ -92,6 +89,8 @@
         "height": "ความสูง"
     },
     "progressPage": {
-        "title": "การทำงาน"
+        "title": "การทำงาน",
+        "start": "เริ่มต้น",
+        "restart": "เริ่มต้นอีกครั้ง"
     }
 }

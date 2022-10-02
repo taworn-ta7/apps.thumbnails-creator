@@ -34,6 +34,7 @@ class AppShare {
   // ----------------------------------------------------------------------
 
   static const defaultFileOutput = '%F-thumb%N';
+  static const maxRetry = 10;
 
   /// Image files.
   final images = <Thumbnail>[];
@@ -54,8 +55,8 @@ class AppShare {
   bool asSize = false;
 
   /// Width, can be % or fix
-  int width = 0;
+  int width = 50;
 
   /// Height, can be % or fix
-  int height = 0;
+  int height = 50;
 }
