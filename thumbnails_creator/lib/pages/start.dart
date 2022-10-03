@@ -86,7 +86,7 @@ class _StartState extends State<StartPage> {
                 final converter = ByteConverter(item.sourceSize.toDouble());
                 return ListTile(
                   leading: const Icon(Icons.photo_size_select_large),
-                  title: Text(item.sourceName),
+                  title: Text(item.source),
                   subtitle: Text("${f.format(converter.kiloBytes)} KB"),
                   trailing: const Icon(Icons.delete),
                   onTap: () => _editItem(item),

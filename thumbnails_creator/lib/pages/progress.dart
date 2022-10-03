@@ -98,19 +98,19 @@ class _ProgressState extends State<ProgressPage> {
                   }
                   return ListTile(
                     leading: const Icon(Icons.close),
-                    title: Text(item.sourceName),
+                    title: Text(item.source),
                     subtitle: Text(error),
                   );
                 } else if (item.ok == true) {
                   return ListTile(
                     leading: const Icon(Icons.check),
-                    title: Text(item.sourceName),
+                    title: Text(item.source),
                     subtitle: Text(item.target ?? ''),
                   );
                 } else {
                   return ListTile(
                     leading: const Icon(Icons.photo_size_select_large),
-                    title: Text(item.sourceName),
+                    title: Text(item.source),
                     subtitle: const Text(''),
                   );
                 }
