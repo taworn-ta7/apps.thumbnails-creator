@@ -169,17 +169,6 @@ class _ProgressState extends State<ProgressPage> {
   /// Next page.
   Future<void> _nextPage() async {
     if (_start == null) {
-      /* testing
-      late Thumbnail o;
-      setState(() {
-        o = _items[0];
-      });
-      setState(() {
-        o.ok = false;
-        o.error = 'err';
-      });
-      */
-
       setState(() {
         _start = 0;
       });
@@ -235,7 +224,7 @@ class _ProgressState extends State<ProgressPage> {
       return;
     }
 
-    // reduces image, get size
+    // reduces image size
     late int w, h;
     if (appShare.sizeEnum == SizeEnumType.percent) {
       // size as %
